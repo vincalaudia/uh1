@@ -1,0 +1,5018 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSA Mastery — Complete Python Study Guide</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Fraunces:ital,wght@0,300;0,700;0,900;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0a0a0f;
+        --paper: #f5f0e8;
+        --paper2: #ede8dc;
+        --paper3: #e3ddd0;
+        --accent: #c84b31;
+        --accent2: #2a6496;
+        --accent3: #2d7a4f;
+        --gold: #c8962a;
+        --ink2: #2c2c3a;
+        --ink3: #5a5a72;
+        --ink4: #8a8aa0;
+        --border: #ccc7b8;
+
+        --c-stack: #c84b31;
+        --c-queue: #c8962a;
+        --c-dp: #2d7a4f;
+        --c-graph: #2a6496;
+        --c-hash: #7a2d7a;
+        --c-array: #c84b31;
+        --c-linked: #c8962a;
+        --c-tree: #2d7a4f;
+        --c-sorting: #2a6496;
+        --c-search: #7a2d7a;
+        --c-python: #c8962a;
+
+        --mono: "IBM Plex Mono", monospace;
+        --serif: "Fraunces", Georgia, serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink2);
+        font-family: var(--serif);
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* ─── SIDEBAR ─── */
+      #sidebar {
+        width: 280px;
+        min-width: 280px;
+        background: var(--ink);
+        color: var(--paper);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        border-right: 3px solid var(--accent);
+      }
+      #sidebar::-webkit-scrollbar {
+        width: 4px;
+      }
+      #sidebar::-webkit-scrollbar-thumb {
+        background: #333;
+      }
+
+      .sidebar-brand {
+        padding: 28px 20px 20px;
+        border-bottom: 1px solid #222;
+      }
+      .sidebar-brand h1 {
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--paper);
+        line-height: 1.1;
+        letter-spacing: -0.5px;
+      }
+      .sidebar-brand h1 span {
+        color: var(--accent);
+      }
+      .sidebar-brand p {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--ink4);
+        margin-top: 6px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .nav-group {
+        padding: 16px 0 8px;
+      }
+      .nav-group-label {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--ink4);
+        padding: 0 20px 8px;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 20px;
+        cursor: pointer;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink4);
+        transition: all 0.15s;
+        border-left: 3px solid transparent;
+        text-decoration: none;
+      }
+      .nav-item:hover {
+        color: var(--paper);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .nav-item.active {
+        color: var(--paper);
+        border-left-color: var(--accent);
+        background: rgba(200, 75, 49, 0.12);
+      }
+      .nav-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: currentColor;
+        opacity: 0.5;
+      }
+      .nav-item.active .nav-dot {
+        opacity: 1;
+      }
+
+      .sidebar-footer {
+        margin-top: auto;
+        padding: 16px 20px;
+        border-top: 1px solid #222;
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--ink4);
+      }
+      .prog-wrap {
+        margin-top: 8px;
+      }
+      .prog-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+      .prog-bar {
+        height: 3px;
+        background: #222;
+        border-radius: 2px;
+      }
+      .prog-fill {
+        height: 100%;
+        background: var(--accent);
+        border-radius: 2px;
+        transition: width 0.4s;
+      }
+
+      /* ─── MAIN ─── */
+      #main {
+        margin-left: 280px;
+        flex: 1;
+        min-height: 100vh;
+      }
+
+      /* ─── HERO ─── */
+      .hero {
+        background: var(--ink);
+        padding: 60px 64px 48px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "DSA";
+        position: absolute;
+        right: -20px;
+        top: -30px;
+        font-family: var(--serif);
+        font-size: 220px;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.025);
+        pointer-events: none;
+        line-height: 1;
+      }
+      .hero-tag {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 14px;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-size: clamp(36px, 5vw, 60px);
+        font-weight: 900;
+        color: var(--paper);
+        line-height: 1.05;
+        letter-spacing: -2px;
+        margin-bottom: 16px;
+      }
+      .hero h1 em {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .hero p {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink4);
+        max-width: 560px;
+        line-height: 1.8;
+      }
+      .topic-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 28px;
+      }
+      .chip {
+        padding: 6px 14px;
+        border-radius: 3px;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        border: 1px solid;
+        letter-spacing: 0.5px;
+      }
+      .chip:hover {
+        transform: translateY(-1px);
+      }
+      .chip-stack {
+        border-color: var(--c-stack);
+        color: var(--c-stack);
+        background: rgba(200, 75, 49, 0.1);
+      }
+      .chip-queue {
+        border-color: var(--c-queue);
+        color: var(--c-queue);
+        background: rgba(200, 150, 42, 0.1);
+      }
+      .chip-dp {
+        border-color: var(--c-dp);
+        color: var(--c-dp);
+        background: rgba(45, 122, 79, 0.1);
+      }
+      .chip-graph {
+        border-color: var(--c-graph);
+        color: var(--c-graph);
+        background: rgba(42, 100, 150, 0.1);
+      }
+      .chip-hash {
+        border-color: var(--c-hash);
+        color: var(--c-hash);
+        background: rgba(122, 45, 122, 0.1);
+      }
+      .chip-array {
+        border-color: var(--c-array);
+        color: var(--c-array);
+        background: rgba(200, 75, 49, 0.1);
+      }
+      .chip-linked {
+        border-color: var(--c-linked);
+        color: var(--c-linked);
+        background: rgba(200, 150, 42, 0.1);
+      }
+      .chip-tree {
+        border-color: var(--c-tree);
+        color: var(--c-tree);
+        background: rgba(45, 122, 79, 0.1);
+      }
+      .chip-sort {
+        border-color: var(--c-sorting);
+        color: var(--c-sorting);
+        background: rgba(42, 100, 150, 0.1);
+      }
+      .chip-search {
+        border-color: var(--c-search);
+        color: var(--c-search);
+        background: rgba(122, 45, 122, 0.1);
+      }
+      .chip-python {
+        border-color: var(--c-python);
+        color: var(--c-python);
+        background: rgba(200, 150, 42, 0.1);
+      }
+
+      /* ─── SECTIONS ─── */
+      .section {
+        display: none;
+        padding: 48px 64px;
+        border-bottom: 1px solid var(--border);
+      }
+      .section.active {
+        display: block;
+        animation: fadeUp 0.25s ease;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .welcome-section {
+        display: block;
+        padding: 48px 64px;
+      }
+
+      /* ─── SECTION HEADER ─── */
+      .sec-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: 40px;
+        padding-bottom: 32px;
+        border-bottom: 2px solid var(--border);
+      }
+      .sec-num {
+        font-family: var(--serif);
+        font-size: 72px;
+        font-weight: 900;
+        line-height: 1;
+        opacity: 0.07;
+        color: var(--ink);
+        flex-shrink: 0;
+        margin-top: -8px;
+      }
+      .sec-meta {
+      }
+      .sec-tag {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .sec-header h2 {
+        font-family: var(--serif);
+        font-size: 38px;
+        font-weight: 900;
+        letter-spacing: -1.5px;
+        line-height: 1.1;
+        margin-bottom: 10px;
+      }
+      .sec-header p {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink3);
+        line-height: 1.8;
+        max-width: 600px;
+      }
+      .sec-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .badge {
+        padding: 3px 10px;
+        border-radius: 2px;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      /* ─── CONTENT CARDS ─── */
+      .card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .card-header h3 {
+        font-family: var(--serif);
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+      }
+      .card-tag {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--ink4);
+        padding: 2px 7px;
+        background: var(--paper2);
+        border-radius: 2px;
+      }
+      .card p {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink3);
+        line-height: 1.8;
+        margin-bottom: 12px;
+      }
+
+      /* ─── CODE ─── */
+      pre {
+        background: var(--ink);
+        color: #cdd9e5;
+        border-radius: 4px;
+        padding: 20px;
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1.75;
+        overflow-x: auto;
+        margin: 12px 0;
+        border-left: 3px solid var(--accent);
+        position: relative;
+      }
+      pre .pre-label {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #444;
+      }
+      .kw {
+        color: #ff7b72;
+      }
+      .fn {
+        color: #d2a8ff;
+      }
+      .st {
+        color: #a5d6ff;
+      }
+      .cm {
+        color: #484f58;
+        font-style: italic;
+      }
+      .nm {
+        color: #79c0ff;
+      }
+      .num {
+        color: #ffa657;
+      }
+      .op {
+        color: #ffa657;
+      }
+      .dec {
+        color: #e3b341;
+      }
+
+      /* ─── IO BLOCKS ─── */
+      .io-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 12px 0;
+      }
+      .io-box {
+        border-radius: 4px;
+        padding: 14px 16px;
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+      .io-in {
+        background: rgba(42, 100, 150, 0.08);
+        border: 1px solid rgba(42, 100, 150, 0.25);
+      }
+      .io-out {
+        background: rgba(45, 122, 79, 0.08);
+        border: 1px solid rgba(45, 122, 79, 0.25);
+      }
+      .io-label {
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        color: var(--ink4);
+      }
+      .io-val {
+        color: var(--ink2);
+        font-weight: 600;
+        line-height: 1.7;
+      }
+
+      /* ─── VISUAL ─── */
+      .visual-box {
+        background: var(--paper2);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 20px;
+        margin: 12px 0;
+        overflow-x: auto;
+      }
+      .vis-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--ink4);
+        margin-bottom: 12px;
+      }
+
+      /* Stack visual */
+      .stack-blocks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+      .s-block {
+        width: 200px;
+        padding: 10px 20px;
+        text-align: center;
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 600;
+        border: 2px solid var(--c-stack);
+        transition: all 0.3s;
+      }
+      .s-block.top {
+        background: var(--c-stack);
+        color: white;
+        border-radius: 4px 4px 0 0;
+      }
+      .s-block.mid {
+        background: rgba(200, 75, 49, 0.12);
+        color: var(--c-stack);
+      }
+      .s-block.bot {
+        background: rgba(200, 75, 49, 0.06);
+        color: var(--c-stack);
+        border-radius: 0 0 4px 4px;
+      }
+      .s-block.empty {
+        border-style: dashed;
+        color: var(--ink4);
+        border-color: var(--border);
+        background: transparent;
+      }
+      .stack-arrow {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--c-stack);
+        text-align: center;
+        margin: 4px 0;
+      }
+
+      /* Queue visual */
+      .queue-blocks {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+      }
+      .q-block {
+        min-width: 72px;
+        padding: 12px 14px;
+        text-align: center;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 600;
+        border-top: 2px solid var(--c-queue);
+        border-bottom: 2px solid var(--c-queue);
+        border-right: 1px solid rgba(200, 150, 42, 0.3);
+      }
+      .q-block.front {
+        background: var(--c-queue);
+        color: white;
+        border-left: 2px solid var(--c-queue);
+        border-radius: 4px 0 0 4px;
+      }
+      .q-block.mid {
+        background: rgba(200, 150, 42, 0.1);
+        color: var(--c-queue);
+      }
+      .q-block.back {
+        background: rgba(200, 150, 42, 0.05);
+        color: var(--c-queue);
+        border-radius: 0 4px 4px 0;
+        border-right: 2px solid var(--c-queue);
+      }
+      .q-arrows {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--c-queue);
+      }
+
+      /* ─── INTERACTIVE ─── */
+      .playground {
+        background: var(--paper2);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 18px 20px;
+        margin: 12px 0;
+      }
+      .play-title {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--ink3);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .play-title::before {
+        content: "▶";
+        font-size: 8px;
+        color: var(--accent);
+      }
+      .play-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .play-in {
+        padding: 7px 12px;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink2);
+        width: 90px;
+        outline: none;
+      }
+      .play-in:focus {
+        border-color: var(--accent);
+      }
+      .btn {
+        padding: 7px 14px;
+        border-radius: 3px;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1.5px solid;
+        background: transparent;
+        transition: all 0.15s;
+        letter-spacing: 0.5px;
+      }
+      .btn-r {
+        border-color: var(--c-stack);
+        color: var(--c-stack);
+      }
+      .btn-r:hover {
+        background: var(--c-stack);
+        color: white;
+      }
+      .btn-y {
+        border-color: var(--c-queue);
+        color: var(--c-queue);
+      }
+      .btn-y:hover {
+        background: var(--c-queue);
+        color: white;
+      }
+      .btn-g {
+        border-color: var(--c-dp);
+        color: var(--c-dp);
+      }
+      .btn-g:hover {
+        background: var(--c-dp);
+        color: white;
+      }
+      .btn-b {
+        border-color: var(--c-graph);
+        color: var(--c-graph);
+      }
+      .btn-b:hover {
+        background: var(--c-graph);
+        color: white;
+      }
+      .play-log {
+        background: var(--ink);
+        color: #8b9eb0;
+        border-radius: 3px;
+        padding: 10px 14px;
+        font-family: var(--mono);
+        font-size: 11px;
+        min-height: 36px;
+        line-height: 1.9;
+        max-height: 120px;
+        overflow-y: auto;
+      }
+      .log-g {
+        color: #5fb87a;
+      }
+      .log-r {
+        color: #e06c75;
+      }
+      .log-y {
+        color: #e5c07b;
+      }
+      .log-b {
+        color: #61afef;
+      }
+
+      /* ─── CALLOUT ─── */
+      .callout {
+        border-radius: 3px;
+        padding: 14px 18px;
+        margin: 14px 0;
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1.8;
+        border-left: 4px solid;
+      }
+      .callout strong {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .c-red {
+        background: rgba(200, 75, 49, 0.07);
+        border-color: var(--c-stack);
+        color: var(--ink2);
+      }
+      .c-yellow {
+        background: rgba(200, 150, 42, 0.07);
+        border-color: var(--c-queue);
+        color: var(--ink2);
+      }
+      .c-green {
+        background: rgba(45, 122, 79, 0.07);
+        border-color: var(--c-dp);
+        color: var(--ink2);
+      }
+      .c-blue {
+        background: rgba(42, 100, 150, 0.07);
+        border-color: var(--c-graph);
+        color: var(--ink2);
+      }
+      .c-purple {
+        background: rgba(122, 45, 122, 0.07);
+        border-color: var(--c-hash);
+        color: var(--ink2);
+      }
+
+      /* ─── COMPLEXITY TABLE ─── */
+      .ctable {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--mono);
+        font-size: 12px;
+        margin: 12px 0;
+      }
+      .ctable th {
+        background: var(--ink);
+        color: var(--ink4);
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+      .ctable td {
+        padding: 9px 14px;
+        border-bottom: 1px solid var(--paper3);
+        color: var(--ink2);
+      }
+      .ctable tr:last-child td {
+        border-bottom: none;
+      }
+      .ctable tr:hover td {
+        background: var(--paper2);
+      }
+      .o1 {
+        color: var(--c-dp);
+        font-weight: 700;
+      }
+      .on {
+        color: var(--c-queue);
+        font-weight: 700;
+      }
+      .ologn {
+        color: var(--c-graph);
+        font-weight: 700;
+      }
+      .on2 {
+        color: var(--c-stack);
+        font-weight: 700;
+      }
+      .o2n {
+        color: var(--c-hash);
+        font-weight: 700;
+      }
+
+      /* ─── GRID ─── */
+      .g2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .g3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 900px) {
+        .g2,
+        .g3 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ─── DIVIDER ─── */
+      .div {
+        height: 1px;
+        background: var(--border);
+        margin: 28px 0;
+      }
+      .div-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 28px 0;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--ink4);
+      }
+      .div-label::before,
+      .div-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ─── QNA ─── */
+      .qna-item {
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+      .qna-q {
+        padding: 14px 18px;
+        background: white;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink2);
+        transition: background 0.15s;
+        gap: 12px;
+      }
+      .qna-q:hover {
+        background: var(--paper2);
+      }
+      .qna-arrow {
+        font-size: 10px;
+        color: var(--ink4);
+        transition: transform 0.2s;
+        flex-shrink: 0;
+      }
+      .qna-a {
+        display: none;
+        padding: 14px 18px;
+        background: var(--paper2);
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink3);
+        line-height: 1.8;
+        border-top: 1px solid var(--border);
+      }
+      .qna-a.open {
+        display: block;
+      }
+      .qna-arrow.open {
+        transform: rotate(90deg);
+      }
+
+      /* ─── QUIZ ─── */
+      .quiz-box {
+        background: var(--ink);
+        border-radius: 4px;
+        padding: 24px;
+        margin-top: 28px;
+      }
+      .quiz-title {
+        font-family: var(--serif);
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--paper);
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+      }
+      .q-item {
+        margin-bottom: 22px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid #1e1e2a;
+      }
+      .q-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .q-text {
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--paper);
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+      .q-opt {
+        display: block;
+        padding: 9px 14px;
+        margin: 5px 0;
+        background: #111118;
+        border: 1px solid #2a2a38;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink4);
+        transition: all 0.15s;
+      }
+      .q-opt:hover {
+        border-color: #4a4a5a;
+        color: var(--paper);
+      }
+      .q-opt.correct {
+        background: rgba(45, 122, 79, 0.2);
+        border-color: var(--c-dp);
+        color: #6fcf97;
+      }
+      .q-opt.wrong {
+        background: rgba(200, 75, 49, 0.15);
+        border-color: var(--c-stack);
+        color: #eb8c7c;
+      }
+      .q-opt.reveal {
+        background: rgba(45, 122, 79, 0.1);
+        border-color: rgba(45, 122, 79, 0.5);
+        color: #6fcf97;
+      }
+      .q-exp {
+        display: none;
+        margin-top: 8px;
+        padding: 10px 14px;
+        background: #080810;
+        border-radius: 3px;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--ink3);
+        line-height: 1.8;
+      }
+      .q-exp.show {
+        display: block;
+      }
+
+      /* ─── CASE STUDY ─── */
+      .case-study {
+        background: linear-gradient(135deg, var(--ink) 0%, #0f1520 100%);
+        border-radius: 4px;
+        padding: 24px;
+        margin: 16px 0;
+        border: 1px solid #2a2a38;
+        position: relative;
+        overflow: hidden;
+      }
+      .case-study::before {
+        content: "CASE";
+        position: absolute;
+        right: -10px;
+        top: -15px;
+        font-family: var(--serif);
+        font-size: 80px;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.02);
+      }
+      .case-tag {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .case-title {
+        font-family: var(--serif);
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--paper);
+        margin-bottom: 8px;
+      }
+      .case-body {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink4);
+        line-height: 1.8;
+        margin-bottom: 12px;
+      }
+
+      /* ─── SVG GRAPH VIS ─── */
+      .graph-svg-wrap {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 16px;
+        margin: 12px 0;
+        overflow-x: auto;
+      }
+
+      /* ─── DP TABLE ─── */
+      .dp-table {
+        border-collapse: collapse;
+        font-family: var(--mono);
+        font-size: 12px;
+        width: 100%;
+      }
+      .dp-table th {
+        background: var(--ink);
+        color: var(--ink4);
+        padding: 8px 12px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        border: 1px solid #2a2a38;
+      }
+      .dp-table td {
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        text-align: center;
+      }
+      .dp-base {
+        background: rgba(200, 150, 42, 0.15);
+        color: var(--c-queue);
+        font-weight: 700;
+      }
+      .dp-fill {
+        background: rgba(45, 122, 79, 0.15);
+        color: var(--c-dp);
+        font-weight: 700;
+      }
+      .dp-ans {
+        background: var(--c-dp);
+        color: white;
+        font-weight: 700;
+      }
+
+      /* ─── HASH VIS ─── */
+      .hash-table-vis {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .hash-row-vis {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .hash-idx-vis {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--ink4);
+        width: 28px;
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .hash-bucket {
+        flex: 1;
+        padding: 8px 14px;
+        border-radius: 3px;
+        font-family: var(--mono);
+        font-size: 11px;
+        border: 1px solid var(--border);
+        background: var(--paper2);
+        color: var(--ink3);
+      }
+      .hash-bucket.filled {
+        background: rgba(122, 45, 122, 0.08);
+        border-color: rgba(122, 45, 122, 0.3);
+        color: var(--c-hash);
+      }
+      .hash-bucket.empty {
+        color: var(--ink4);
+        font-style: italic;
+        border-style: dashed;
+      }
+      .hash-chain-vis {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 3px;
+      }
+      .hash-node-vis {
+        padding: 5px 10px;
+        border-radius: 3px;
+        background: rgba(122, 45, 122, 0.12);
+        border: 1px solid rgba(122, 45, 122, 0.3);
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--c-hash);
+      }
+
+      /* ─── TIPS ─── */
+      .tip-box {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 16px 20px;
+        margin: 8px 0;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .tip-num {
+        font-family: var(--serif);
+        font-size: 28px;
+        font-weight: 900;
+        color: var(--paper3);
+        line-height: 1;
+        flex-shrink: 0;
+        margin-top: -4px;
+      }
+      .tip-content {
+      }
+      .tip-content h4 {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink2);
+        margin-bottom: 4px;
+      }
+      .tip-content p {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink3);
+        line-height: 1.7;
+      }
+
+      /* ─── WELCOME GRID ─── */
+      .welcome-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+      .wcard {
+        border-radius: 4px;
+        padding: 20px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+      }
+      .wcard:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      code {
+        font-family: var(--mono);
+        font-size: 11px;
+        background: var(--paper2);
+        padding: 1px 5px;
+        border-radius: 2px;
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
+    <nav id="sidebar">
+      <div class="sidebar-brand">
+        <h1>DSA<br /><span>Mastery</span></h1>
+        <p>Complete Python Guide</p>
+      </div>
+      <div class="sidebar-nav">
+        <div class="nav-group">
+          <div class="nav-group-label">Getting Started</div>
+          <div class="nav-item active" onclick="nav('welcome', this)">
+            <div class="nav-dot" style="background: var(--accent)"></div>
+            Overview
+          </div>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-label">Core Structures</div>
+          <div class="nav-item" onclick="nav('array', this)">
+            <div class="nav-dot" style="background: var(--c-array)"></div>
+            Arrays & Strings
+          </div>
+          <div class="nav-item" onclick="nav('linked', this)">
+            <div class="nav-dot" style="background: var(--c-linked)"></div>
+            Linked Lists
+          </div>
+          <div class="nav-item" onclick="nav('stack', this)">
+            <div class="nav-dot" style="background: var(--c-stack)"></div>
+            Stack
+          </div>
+          <div class="nav-item" onclick="nav('queue', this)">
+            <div class="nav-dot" style="background: var(--c-queue)"></div>
+            Queue
+          </div>
+          <div class="nav-item" onclick="nav('hash', this)">
+            <div class="nav-dot" style="background: var(--c-hash)"></div>
+            Hash Table
+          </div>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-label">Trees & Graphs</div>
+          <div class="nav-item" onclick="nav('tree', this)">
+            <div class="nav-dot" style="background: var(--c-tree)"></div>
+            Trees & BST
+          </div>
+          <div class="nav-item" onclick="nav('graph', this)">
+            <div class="nav-dot" style="background: var(--c-graph)"></div>
+            Graph
+          </div>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-label">Algorithms</div>
+          <div class="nav-item" onclick="nav('sorting', this)">
+            <div class="nav-dot" style="background: var(--c-sorting)"></div>
+            Sorting
+          </div>
+          <div class="nav-item" onclick="nav('search', this)">
+            <div class="nav-dot" style="background: var(--c-search)"></div>
+            Binary Search
+          </div>
+          <div class="nav-item" onclick="nav('dp', this)">
+            <div class="nav-dot" style="background: var(--c-dp)"></div>
+            Dynamic Programming
+          </div>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-label">Python</div>
+          <div class="nav-item" onclick="nav('python', this)">
+            <div class="nav-dot" style="background: var(--c-python)"></div>
+            Python Syntax Tips
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-footer">
+        <div>Study Progress</div>
+        <div class="prog-wrap">
+          <div class="prog-label">
+            <span id="prog-done">0</span>/<span id="prog-total">0</span> topics
+            read
+          </div>
+          <div class="prog-bar">
+            <div class="prog-fill" id="prog-fill" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ═══════════════ MAIN ═══════════════ -->
+    <main id="main">
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-tag">// Python DSA — Complete Reference</div>
+        <h1>Data Structures<br />& Algorithms<br /><em>in Python.</em></h1>
+        <p>
+          Every structure. Every algorithm. Full examples, I/O traces,
+          visualizations, case studies, and quizzes. Built for the test.
+        </p>
+        <div class="topic-chips">
+          <span class="chip chip-array" onclick="nav('array', null)"
+            >Arrays</span
+          >
+          <span class="chip chip-linked" onclick="nav('linked', null)"
+            >Linked Lists</span
+          >
+          <span class="chip chip-stack" onclick="nav('stack', null)"
+            >Stack</span
+          >
+          <span class="chip chip-queue" onclick="nav('queue', null)"
+            >Queue</span
+          >
+          <span class="chip chip-hash" onclick="nav('hash', null)"
+            >Hash Table</span
+          >
+          <span class="chip chip-tree" onclick="nav('tree', null)">Trees</span>
+          <span class="chip chip-search" onclick="nav('graph', null)"
+            >Graph</span
+          >
+          <span class="chip chip-sort" onclick="nav('sorting', null)"
+            >Sorting</span
+          >
+          <span class="chip chip-search" onclick="nav('search', null)"
+            >Binary Search</span
+          >
+          <span class="chip chip-dp" onclick="nav('dp', null)"
+            >Dynamic Programming</span
+          >
+          <span class="chip chip-python" onclick="nav('python', null)"
+            >Python Tips</span
+          >
+        </div>
+      </div>
+
+      <!-- WELCOME -->
+      <div class="welcome-section" id="sec-welcome">
+        <div class="sec-header">
+          <div class="sec-num">00</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--accent)">Start Here</div>
+            <h2 style="color: var(--ink)">What's Inside</h2>
+            <p>
+              11 topics. Every topic has: definition, visual, Python code, I/O
+              examples, use cases, case study, Q&amp;A, and a quiz. Click any
+              card or use the sidebar.
+            </p>
+          </div>
+        </div>
+        <div class="welcome-cards">
+          <div
+            class="wcard"
+            style="
+              background: rgba(200, 75, 49, 0.07);
+              border-color: var(--c-array);
+            "
+            onclick="nav('array', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-array);
+                margin-bottom: 6px;
+              "
+            >
+              01
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Arrays &amp; Strings
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              Two pointer, sliding window
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(200, 150, 42, 0.07);
+              border-color: var(--c-linked);
+            "
+            onclick="nav('linked', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-linked);
+                margin-bottom: 6px;
+              "
+            >
+              02
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Linked Lists
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              Reverse, cycle detection
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(200, 75, 49, 0.07);
+              border-color: var(--c-stack);
+            "
+            onclick="nav('stack', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-stack);
+                margin-bottom: 6px;
+              "
+            >
+              03
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Stack
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              LIFO, brackets, monotonic
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(200, 150, 42, 0.07);
+              border-color: var(--c-queue);
+            "
+            onclick="nav('queue', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-queue);
+                margin-bottom: 6px;
+              "
+            >
+              04
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Queue
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              FIFO, BFS, deque
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(122, 45, 122, 0.07);
+              border-color: var(--c-hash);
+            "
+            onclick="nav('hash', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-hash);
+                margin-bottom: 6px;
+              "
+            >
+              05
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Hash Table
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              dict, Counter, set
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(45, 122, 79, 0.07);
+              border-color: var(--c-tree);
+            "
+            onclick="nav('tree', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-tree);
+                margin-bottom: 6px;
+              "
+            >
+              06
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Trees &amp; BST
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              4 traversals, LCA, validate
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(42, 100, 150, 0.07);
+              border-color: var(--c-graph);
+            "
+            onclick="nav('graph', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-graph);
+                margin-bottom: 6px;
+              "
+            >
+              07
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Graph
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              BFS, DFS, islands
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(42, 100, 150, 0.07);
+              border-color: var(--c-sorting);
+            "
+            onclick="nav('sorting', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-sorting);
+                margin-bottom: 6px;
+              "
+            >
+              08
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Sorting
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              Merge, quick, heap sort
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(122, 45, 122, 0.07);
+              border-color: var(--c-search);
+            "
+            onclick="nav('search', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-search);
+                margin-bottom: 6px;
+              "
+            >
+              09
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Binary Search
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              Template, variants
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(45, 122, 79, 0.07);
+              border-color: var(--c-dp);
+            "
+            onclick="nav('dp', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-dp);
+                margin-bottom: 6px;
+              "
+            >
+              10
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Dynamic Programming
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              Memo, tabulation, LCS
+            </div>
+          </div>
+          <div
+            class="wcard"
+            style="
+              background: rgba(200, 150, 42, 0.07);
+              border-color: var(--c-python);
+            "
+            onclick="nav('python', null)"
+          >
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--c-python);
+                margin-bottom: 6px;
+              "
+            >
+              11
+            </div>
+            <div
+              style="
+                font-family: var(--serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+              "
+            >
+              Python Tips
+            </div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--ink4);
+                margin-top: 4px;
+              "
+            >
+              Syntax, built-ins, tricks
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: ARRAYS ═══════════ -->
+      <div class="section" id="sec-array">
+        <div class="sec-header">
+          <div class="sec-num">01</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-array)">
+              Data Structure
+            </div>
+            <h2>Arrays &amp; Strings</h2>
+            <p>
+              Contiguous memory. O(1) access by index. The foundation of all
+              DSA.
+            </p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 75, 49, 0.1);
+                  color: var(--c-array);
+                "
+                >O(1) access</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 75, 49, 0.1);
+                  color: var(--c-array);
+                "
+                >O(n) search</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 75, 49, 0.1);
+                  color: var(--c-array);
+                "
+                >O(n) insert</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Definition</h3>
+              <span class="card-tag">concept</span>
+            </div>
+            <p>
+              An array stores elements in contiguous memory locations. In
+              Python, <code>list</code> is a dynamic array — it automatically
+              resizes. Strings are immutable sequences of characters.
+            </p>
+            <div class="visual-box">
+              <div class="vis-label">Array: arr = [10, 20, 30, 40, 50]</div>
+              <div style="display: flex; gap: 0">
+                <div style="text-align: center; flex: 1">
+                  <div
+                    style="
+                      background: var(--ink);
+                      color: var(--paper);
+                      padding: 10px;
+                      font-family: var(--mono);
+                      font-size: 13px;
+                      font-weight: 700;
+                      border: 2px solid var(--c-array);
+                    "
+                  >
+                    10
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--mono);
+                      font-size: 10px;
+                      color: var(--ink4);
+                      margin-top: 4px;
+                    "
+                  >
+                    idx 0
+                  </div>
+                </div>
+                <div style="text-align: center; flex: 1">
+                  <div
+                    style="
+                      background: rgba(200, 75, 49, 0.1);
+                      color: var(--c-array);
+                      padding: 10px;
+                      font-family: var(--mono);
+                      font-size: 13px;
+                      font-weight: 700;
+                      border: 2px solid rgba(200, 75, 49, 0.3);
+                      border-left: none;
+                    "
+                  >
+                    20
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--mono);
+                      font-size: 10px;
+                      color: var(--ink4);
+                      margin-top: 4px;
+                    "
+                  >
+                    idx 1
+                  </div>
+                </div>
+                <div style="text-align: center; flex: 1">
+                  <div
+                    style="
+                      background: rgba(200, 75, 49, 0.1);
+                      color: var(--c-array);
+                      padding: 10px;
+                      font-family: var(--mono);
+                      font-size: 13px;
+                      font-weight: 700;
+                      border: 2px solid rgba(200, 75, 49, 0.3);
+                      border-left: none;
+                    "
+                  >
+                    30
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--mono);
+                      font-size: 10px;
+                      color: var(--ink4);
+                      margin-top: 4px;
+                    "
+                  >
+                    idx 2
+                  </div>
+                </div>
+                <div style="text-align: center; flex: 1">
+                  <div
+                    style="
+                      background: rgba(200, 75, 49, 0.1);
+                      color: var(--c-array);
+                      padding: 10px;
+                      font-family: var(--mono);
+                      font-size: 13px;
+                      font-weight: 700;
+                      border: 2px solid rgba(200, 75, 49, 0.3);
+                      border-left: none;
+                    "
+                  >
+                    40
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--mono);
+                      font-size: 10px;
+                      color: var(--ink4);
+                      margin-top: 4px;
+                    "
+                  >
+                    idx 3
+                  </div>
+                </div>
+                <div style="text-align: center; flex: 1">
+                  <div
+                    style="
+                      background: rgba(200, 75, 49, 0.1);
+                      color: var(--c-array);
+                      padding: 10px;
+                      font-family: var(--mono);
+                      font-size: 13px;
+                      font-weight: 700;
+                      border: 2px solid rgba(200, 75, 49, 0.3);
+                      border-left: none;
+                    "
+                  >
+                    50
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--mono);
+                      font-size: 10px;
+                      color: var(--ink4);
+                      margin-top: 4px;
+                    "
+                  >
+                    idx -1
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Use Cases</h3>
+              <span class="card-tag">when to use</span>
+            </div>
+            <p>
+              ✦ Store ordered data with fast index access<br />✦ Sliding window
+              problems<br />✦ Two-pointer technique<br />✦ Prefix sums<br />✦
+              Sorting algorithms<br />✦ Kadane's (max subarray)<br />✦ Storing
+              matrix/grid data
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Core Operations — Python</h3>
+            <span class="card-tag">code</span>
+          </div>
+          <pre><span class="pre-label">Python</span><span class="cm"># ── Create ──────────────────────────────────</span>
+arr = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
+matrix = [[<span class="num">0</span>]*<span class="num">3</span> <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">3</span>)]   <span class="cm"># 3x3 grid</span>
+
+<span class="cm"># ── Access / Slicing ─────────────────────────</span>
+arr[<span class="num">0</span>]           <span class="cm"># 1      — O(1)</span>
+arr[-<span class="num">1</span>]          <span class="cm"># 5      — last element</span>
+arr[<span class="num">1</span>:<span class="num">4</span>]         <span class="cm"># [2,3,4] — slice</span>
+arr[::-<span class="num">1</span>]        <span class="cm"># [5,4,3,2,1] — reversed</span>
+
+<span class="cm"># ── Modify ───────────────────────────────────</span>
+arr.append(<span class="num">6</span>)    <span class="cm"># O(1) amortized</span>
+arr.insert(<span class="num">0</span>, <span class="num">0</span>) <span class="cm"># O(n) — shifts elements</span>
+arr.pop()        <span class="cm"># O(1) — remove last</span>
+arr.pop(<span class="num">0</span>)      <span class="cm"># O(n) — remove first (avoid!)</span>
+
+<span class="cm"># ── Useful ───────────────────────────────────</span>
+<span class="fn">len</span>(arr)         <span class="cm"># length</span>
+<span class="fn">sum</span>(arr)         <span class="cm"># sum all</span>
+<span class="fn">min</span>(arr), <span class="fn">max</span>(arr)
+arr.count(<span class="num">3</span>)    <span class="cm"># count occurrences</span>
+arr.index(<span class="num">3</span>)    <span class="cm"># first index of value</span>
+<span class="fn">sorted</span>(arr)      <span class="cm"># returns new sorted list</span>
+arr.sort()       <span class="cm"># in-place sort</span></pre>
+        </div>
+
+        <div class="div-label">Patterns</div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Two Pointer</h3>
+              <span class="card-tag">pattern</span>
+            </div>
+            <p>
+              Use two indices moving toward each other or same direction. O(n)
+              time, O(1) space.
+            </p>
+            <pre><span class="kw">def</span> <span class="fn">two_sum_sorted</span>(arr, target):
+    l, r = <span class="num">0</span>, <span class="fn">len</span>(arr) - <span class="num">1</span>
+    <span class="kw">while</span> l &lt; r:
+        s = arr[l] + arr[r]
+        <span class="kw">if</span>   s == target: <span class="kw">return</span> [l, r]
+        <span class="kw">elif</span> s &lt;  target: l += <span class="num">1</span>
+        <span class="kw">else</span>:             r -= <span class="num">1</span>
+    <span class="kw">return</span> []</pre>
+            <div class="io-grid">
+              <div class="io-box io-in">
+                <div class="io-label">Input</div>
+                <div class="io-val">arr=[1,3,6,9,11], target=9</div>
+              </div>
+              <div class="io-box io-out">
+                <div class="io-label">Output</div>
+                <div class="io-val">[1, 3] (3+6=9)</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Sliding Window</h3>
+              <span class="card-tag">pattern</span>
+            </div>
+            <p>
+              Expand right, shrink left. Longest substring without repeating
+              characters.
+            </p>
+            <pre><span class="kw">def</span> <span class="fn">longest_no_repeat</span>(s):
+    seen = {}
+    l = best = <span class="num">0</span>
+    <span class="kw">for</span> r, c <span class="kw">in</span> <span class="fn">enumerate</span>(s):
+        <span class="kw">if</span> c <span class="kw">in</span> seen <span class="kw">and</span> seen[c] >= l:
+            l = seen[c] + <span class="num">1</span>
+        seen[c] = r
+        best = <span class="fn">max</span>(best, r - l + <span class="num">1</span>)
+    <span class="kw">return</span> best</pre>
+            <div class="io-grid">
+              <div class="io-box io-in">
+                <div class="io-label">Input</div>
+                <div class="io-val">s = "abcabcbb"</div>
+              </div>
+              <div class="io-box io-out">
+                <div class="io-label">Output</div>
+                <div class="io-val">3 (window "abc")</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Kadane's Algorithm — Maximum Subarray</h3>
+            <span class="card-tag">classic</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">max_subarray</span>(nums):
+    cur = best = nums[<span class="num">0</span>]
+    <span class="kw">for</span> n <span class="kw">in</span> nums[<span class="num">1</span>:]:
+        cur = <span class="fn">max</span>(n, cur + n)   <span class="cm"># extend or restart?</span>
+        best = <span class="fn">max</span>(best, cur)
+    <span class="kw">return</span> best</pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">[-2,1,-3,4,-1,2,1,-5,4]</div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">6 (subarray [4,-1,2,1])</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study">
+          <div class="case-tag">// Case Study</div>
+          <div class="case-title">Spotify: Finding Duplicate Songs</div>
+          <div class="case-body">
+            Spotify needs to detect duplicate songs in a playlist. They store
+            songs as arrays of audio fingerprint values. The problem reduces to:
+            "find all duplicates in an array." Using a frequency counter (hash
+            map over the array) gives O(n) time vs O(n²) brute force. Arrays
+            enable fast sequential processing of audio data.
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">find_duplicates</span>(nums):
+    <span class="cm"># Use indices as hash — for arrays with values 1..n</span>
+    result = []
+    <span class="kw">for</span> n <span class="kw">in</span> nums:
+        idx = <span class="fn">abs</span>(n) - <span class="num">1</span>
+        <span class="kw">if</span> nums[idx] &lt; <span class="num">0</span>:
+            result.append(<span class="fn">abs</span>(n))
+        <span class="kw">else</span>:
+            nums[idx] = -nums[idx]
+    <span class="kw">return</span> result
+<span class="cm"># Input:  [4,3,2,7,8,2,3,1]</span>
+<span class="cm"># Output: [2,3]   O(n) time, O(1) extra space</span></pre>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-array"></div>
+
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Arrays &amp; Strings</div>
+          <div id="q-array"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: LINKED LIST ═══════════ -->
+      <div class="section" id="sec-linked">
+        <div class="sec-header">
+          <div class="sec-num">02</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-linked)">
+              Data Structure
+            </div>
+            <h2>Linked Lists</h2>
+            <p>
+              Nodes connected by pointers. O(1) insert/delete at head, O(n)
+              access.
+            </p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 150, 42, 0.1);
+                  color: var(--c-linked);
+                "
+                >O(1) head insert</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 150, 42, 0.1);
+                  color: var(--c-linked);
+                "
+                >O(n) search</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 150, 42, 0.1);
+                  color: var(--c-linked);
+                "
+                >O(n) access</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Definition &amp; Node</h3>
+              <span class="card-tag">concept</span>
+            </div>
+            <p>
+              Each node holds a <code>val</code> and a
+              <code>next</code> pointer. The last node points to
+              <code>None</code>. No index — must traverse from head.
+            </p>
+            <div class="visual-box">
+              <div class="vis-label">Singly Linked List: 1 → 2 → 3 → None</div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 0;
+                  font-family: var(--mono);
+                  font-size: 12px;
+                "
+              >
+                <div
+                  style="
+                    border: 2px solid var(--c-linked);
+                    border-radius: 4px;
+                    padding: 8px 14px;
+                    text-align: center;
+                  "
+                >
+                  <div style="font-weight: 700; color: var(--c-linked)">1</div>
+                  <div style="font-size: 9px; color: var(--ink4)">val</div>
+                </div>
+                <div
+                  style="color: var(--c-linked); font-size: 18px; margin: 0 4px"
+                >
+                  →
+                </div>
+                <div
+                  style="
+                    border: 2px solid var(--c-linked);
+                    border-radius: 4px;
+                    padding: 8px 14px;
+                    text-align: center;
+                  "
+                >
+                  <div style="font-weight: 700; color: var(--c-linked)">2</div>
+                  <div style="font-size: 9px; color: var(--ink4)">val</div>
+                </div>
+                <div
+                  style="color: var(--c-linked); font-size: 18px; margin: 0 4px"
+                >
+                  →
+                </div>
+                <div
+                  style="
+                    border: 2px solid var(--c-linked);
+                    border-radius: 4px;
+                    padding: 8px 14px;
+                    text-align: center;
+                  "
+                >
+                  <div style="font-weight: 700; color: var(--c-linked)">3</div>
+                  <div style="font-size: 9px; color: var(--ink4)">val</div>
+                </div>
+                <div style="color: var(--ink4); font-size: 14px; margin: 0 8px">
+                  → None
+                </div>
+              </div>
+            </div>
+            <pre><span class="kw">class</span> <span class="fn">ListNode</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, val=<span class="num">0</span>, next=<span class="nm">None</span>):
+        self.val  = val
+        self.next = next</pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Use Cases</h3>
+              <span class="card-tag">when to use</span>
+            </div>
+            <p>
+              ✦ Frequent insert/delete at front<br />✦ Implement stacks and
+              queues<br />✦ LRU Cache (doubly linked + hash)<br />✦ Undo/redo
+              linked history<br />✦ Polynomial representation<br />✦ Music
+              playlist (doubly linked)
+            </p>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Reverse Linked List</h3>
+              <span class="card-tag">must know</span>
+            </div>
+            <pre><span class="kw">def</span> <span class="fn">reverse</span>(head):
+    prev = <span class="nm">None</span>
+    curr = head
+    <span class="kw">while</span> curr:
+        nxt       = curr.next
+        curr.next = prev   <span class="cm"># flip!</span>
+        prev      = curr
+        curr      = nxt
+    <span class="kw">return</span> prev            <span class="cm"># new head</span>
+
+<span class="cm"># 1→2→3→None  becomes  3→2→1→None</span></pre>
+            <div class="io-grid">
+              <div class="io-box io-in">
+                <div class="io-label">Input</div>
+                <div class="io-val">1 → 2 → 3 → 4 → 5</div>
+              </div>
+              <div class="io-box io-out">
+                <div class="io-label">Output</div>
+                <div class="io-val">5 → 4 → 3 → 2 → 1</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Floyd's Cycle Detection</h3>
+              <span class="card-tag">must know</span>
+            </div>
+            <p>Slow moves 1 step, fast moves 2. If cycle exists, they meet.</p>
+            <pre><span class="kw">def</span> <span class="fn">has_cycle</span>(head):
+    slow = fast = head
+    <span class="kw">while</span> fast <span class="kw">and</span> fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        <span class="kw">if</span> slow == fast:
+            <span class="kw">return True</span>
+    <span class="kw">return False</span>
+
+<span class="cm"># Find middle (same trick):</span>
+<span class="kw">def</span> <span class="fn">find_mid</span>(head):
+    slow = fast = head
+    <span class="kw">while</span> fast <span class="kw">and</span> fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    <span class="kw">return</span> slow</pre>
+          </div>
+        </div>
+
+        <div class="callout c-yellow">
+          <strong>💡 Golden Tip</strong>
+          Always use a <strong>dummy head node</strong> when modifying linked
+          lists. It eliminates edge cases where the head itself is deleted or
+          changed.<br />
+          <code>dummy = ListNode(0); dummy.next = head</code>
+        </div>
+
+        <div class="case-study">
+          <div class="case-tag">// Case Study</div>
+          <div class="case-title">Browser Back/Forward History</div>
+          <div class="case-body">
+            Your browser uses a doubly linked list for navigation history. Each
+            page is a node with prev/next pointers. Clicking "Back" = move to
+            prev node. Clicking a new link = create node, set as current,
+            discard all "forward" nodes. O(1) navigation in any direction.
+          </div>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-linked"></div>
+
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Linked Lists</div>
+          <div id="q-linked"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: STACK ═══════════ -->
+      <div class="section" id="sec-stack">
+        <div class="sec-header">
+          <div class="sec-num">03</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-stack)">
+              Data Structure
+            </div>
+            <h2>Stack</h2>
+            <p>
+              LIFO — Last In, First Out. Think: stack of plates. Python list is
+              perfect.
+            </p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 75, 49, 0.1);
+                  color: var(--c-stack);
+                "
+                >push O(1)</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 75, 49, 0.1);
+                  color: var(--c-stack);
+                "
+                >pop O(1)</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 75, 49, 0.1);
+                  color: var(--c-stack);
+                "
+                >peek O(1)</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Visual &amp; Operations</h3>
+              <span class="card-tag">visual</span>
+            </div>
+            <div class="visual-box">
+              <div class="vis-label">
+                Stack state after push(10), push(20), push(30)
+              </div>
+              <div class="stack-blocks">
+                <div class="stack-arrow">← TOP (push/pop here)</div>
+                <div class="s-block top">30 ← top</div>
+                <div class="s-block mid">20</div>
+                <div class="s-block bot">10 ← bottom</div>
+              </div>
+            </div>
+            <div class="playground">
+              <div class="play-title">Stack Playground</div>
+              <div class="play-row">
+                <input class="play-in" id="s-inp" value="42" type="number" />
+                <button class="btn btn-r" onclick="sPush()">PUSH</button>
+                <button class="btn btn-r" onclick="sPop()">POP</button>
+                <button class="btn btn-r" onclick="sPeek()">PEEK</button>
+              </div>
+              <div class="play-log" id="s-log">Try push / pop / peek...</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Python Code</h3>
+              <span class="card-tag">implementation</span>
+            </div>
+            <pre><span class="cm"># Python list = stack</span>
+stack = []
+
+stack.append(<span class="num">10</span>)  <span class="cm"># push — O(1)</span>
+stack.append(<span class="num">20</span>)
+stack.append(<span class="num">30</span>)
+
+top = stack.pop()  <span class="cm"># pop  → 30 — O(1)</span>
+peek = stack[-<span class="num">1</span>]  <span class="cm"># peek → 20 — O(1)</span>
+empty = <span class="kw">not</span> stack  <span class="cm"># True if empty</span>
+size = <span class="fn">len</span>(stack)  <span class="cm"># 2</span></pre>
+            <div class="callout c-red" style="margin-top: 12px">
+              <strong>Use Cases</strong>
+              DFS · Balanced brackets · Undo/redo · Call stack · Expression eval
+              · Monotonic stack (next greater element)
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Problem 1: Balanced Parentheses</h3>
+            <span class="card-tag">classic</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">is_valid</span>(s: <span class="nm">str</span>) -> <span class="nm">bool</span>:
+    stack = []
+    pairs = {<span class="st">')'</span>:<span class="st">'('</span>, <span class="st">'}'</span>:<span class="st">'{'</span>, <span class="st">']'</span>:<span class="st">'['</span>}
+    <span class="kw">for</span> ch <span class="kw">in</span> s:
+        <span class="kw">if</span> ch <span class="kw">in</span> <span class="st">'({['</span>: stack.append(ch)
+        <span class="kw">elif not</span> stack <span class="kw">or</span> stack[-<span class="num">1</span>] != pairs[ch]: <span class="kw">return False</span>
+        <span class="kw">else</span>: stack.pop()
+    <span class="kw">return not</span> stack</pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">"()[]{}"<br />"([)]"<br />"{[]}"</div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">True<br />False<br />True</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Problem 2: Monotonic Stack — Next Greater Element</h3>
+            <span class="card-tag">pattern</span>
+          </div>
+          <p>
+            Keep the stack in monotonically decreasing order. When a larger
+            element is found, it's the "next greater" for all smaller elements
+            in the stack.
+          </p>
+          <pre><span class="kw">def</span> <span class="fn">next_greater</span>(nums):
+    res = [-<span class="num">1</span>] * <span class="fn">len</span>(nums)
+    stack = []   <span class="cm"># stores indices (monotonic decreasing values)</span>
+    <span class="kw">for</span> i, n <span class="kw">in</span> <span class="fn">enumerate</span>(nums):
+        <span class="kw">while</span> stack <span class="kw">and</span> nums[stack[-<span class="num">1</span>]] &lt; n:
+            res[stack.pop()] = n
+        stack.append(i)
+    <span class="kw">return</span> res</pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">[2, 1, 2, 4, 3]</div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">[4, 2, 4, -1, -1]</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Problem 3: Min Stack</h3>
+            <span class="card-tag">design</span>
+          </div>
+          <pre><span class="kw">class</span> <span class="fn">MinStack</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self.stack = []
+        self.min_stack = []  <span class="cm"># tracks minimums</span>
+
+    <span class="kw">def</span> <span class="fn">push</span>(self, val):
+        self.stack.append(val)
+        m = val <span class="kw">if not</span> self.min_stack <span class="kw">else</span> <span class="fn">min</span>(val, self.min_stack[-<span class="num">1</span>])
+        self.min_stack.append(m)
+
+    <span class="kw">def</span> <span class="fn">pop</span>(self):
+        self.stack.pop(); self.min_stack.pop()
+
+    <span class="kw">def</span> <span class="fn">get_min</span>(self): <span class="kw">return</span> self.min_stack[-<span class="num">1</span>]  <span class="cm"># O(1)!</span></pre>
+        </div>
+
+        <div class="case-study">
+          <div class="case-tag">// Case Study</div>
+          <div class="case-title">Code Editor: Undo/Redo</div>
+          <div class="case-body">
+            Every time you type in VS Code, the action is pushed to an undo
+            stack. Ctrl+Z = pop from undo stack, push to redo stack. Ctrl+Y =
+            pop from redo stack, push back to undo. This is literally two stacks
+            working together. The call stack in your Python program is also a
+            stack — that's why recursion causes "stack overflow".
+          </div>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-stack"></div>
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Stack</div>
+          <div id="q-stack"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: QUEUE ═══════════ -->
+      <div class="section" id="sec-queue">
+        <div class="sec-header">
+          <div class="sec-num">04</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-queue)">
+              Data Structure
+            </div>
+            <h2>Queue</h2>
+            <p>
+              FIFO — First In, First Out. Think: line at a store. Use
+              <code>collections.deque</code>.
+            </p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 150, 42, 0.1);
+                  color: var(--c-queue);
+                "
+                >enqueue O(1)</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 150, 42, 0.1);
+                  color: var(--c-queue);
+                "
+                >dequeue O(1)</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(200, 150, 42, 0.1);
+                  color: var(--c-queue);
+                "
+                >peek O(1)</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Visual &amp; Operations</h3>
+              <span class="card-tag">visual</span>
+            </div>
+            <div class="visual-box">
+              <div class="vis-label">
+                Queue: enqueue A, B, C → dequeue → A leaves first
+              </div>
+              <div class="queue-blocks">
+                <div class="q-block front">A ← FRONT</div>
+                <div class="q-block mid">B</div>
+                <div class="q-block back">C ← REAR</div>
+              </div>
+              <div class="q-arrows">
+                <span>← popleft()</span><span>append() →</span>
+              </div>
+            </div>
+            <div class="playground">
+              <div class="play-title">Queue Playground</div>
+              <div class="play-row">
+                <input class="play-in" id="q-inp" value="1" type="number" />
+                <button class="btn btn-y" onclick="qEnq()">ENQUEUE</button>
+                <button class="btn btn-y" onclick="qDeq()">DEQUEUE</button>
+              </div>
+              <div class="play-log" id="q-log">Try enqueue / dequeue...</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Python Code</h3>
+              <span class="card-tag">implementation</span>
+            </div>
+            <pre><span class="kw">from</span> collections <span class="kw">import</span> deque
+
+q = deque()
+
+q.append(<span class="st">"A"</span>)      <span class="cm"># enqueue — O(1)</span>
+q.append(<span class="st">"B"</span>)
+q.append(<span class="st">"C"</span>)
+
+first = q.popleft()  <span class="cm"># dequeue → "A" — O(1)</span>
+front = q[<span class="num">0</span>]        <span class="cm"># peek     → "B"</span>
+
+<span class="cm"># ⚠️ list.pop(0) is O(n) — always use deque!</span>
+
+<span class="cm"># Deque also works as double-ended queue:</span>
+q.appendleft(<span class="st">"Z"</span>)  <span class="cm"># add to front</span>
+q.pop()            <span class="cm"># remove from rear</span></pre>
+            <div class="callout c-yellow" style="margin-top: 12px">
+              <strong>Use Cases</strong>
+              BFS traversal · Level-order tree traversal · Task scheduling ·
+              Sliding window max · Print queue simulation
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>BFS with Queue — Shortest Path</h3>
+            <span class="card-tag">classic</span>
+          </div>
+          <pre><span class="kw">from</span> collections <span class="kw">import</span> deque
+
+<span class="kw">def</span> <span class="fn">bfs_shortest</span>(graph, start, end):
+    visited = {start}
+    q = deque([(start, [start])])  <span class="cm"># (node, path)</span>
+    <span class="kw">while</span> q:
+        node, path = q.popleft()
+        <span class="kw">if</span> node == end: <span class="kw">return</span> path
+        <span class="kw">for</span> nb <span class="kw">in</span> graph.get(node, []):
+            <span class="kw">if</span> nb <span class="kw">not in</span> visited:
+                visited.add(nb)
+                q.append((nb, path + [nb]))
+    <span class="kw">return None</span></pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">
+                graph={'A':['B','C'],'B':['D'],'C':['D'],'D':[]}<br />start='A',
+                end='D'
+              </div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">['A', 'B', 'D']<br />(shortest path)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Level-Order Tree Traversal</h3>
+            <span class="card-tag">classic</span>
+          </div>
+          <pre><span class="kw">from</span> collections <span class="kw">import</span> deque
+
+<span class="kw">def</span> <span class="fn">level_order</span>(root):
+    <span class="kw">if not</span> root: <span class="kw">return</span> []
+    q, res = deque([root]), []
+    <span class="kw">while</span> q:
+        level = []
+        <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(q)):  <span class="cm"># snapshot current level size</span>
+            node = q.popleft()
+            level.append(node.val)
+            <span class="kw">if</span> node.left:  q.append(node.left)
+            <span class="kw">if</span> node.right: q.append(node.right)
+        res.append(level)
+    <span class="kw">return</span> res</pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">
+                Tree: 3<br />
+                / \<br />
+                9 20<br />
+                / \<br />
+                15 7
+              </div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">[[3],[9,20],[15,7]]</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study">
+          <div class="case-tag">// Case Study</div>
+          <div class="case-title">Google Maps: Finding Shortest Route</div>
+          <div class="case-body">
+            When you ask Google Maps for directions, BFS (backed by a priority
+            queue / Dijkstra's) explores roads outward from your location. Each
+            intersection is a node; roads are edges. A queue ensures roads are
+            explored by distance — the shortest path emerges naturally. Without
+            a queue, you'd need to re-explore paths multiple times.
+          </div>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-queue"></div>
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Queue</div>
+          <div id="q-queue"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: HASH TABLE ═══════════ -->
+      <div class="section" id="sec-hash">
+        <div class="sec-header">
+          <div class="sec-num">05</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-hash)">
+              Data Structure
+            </div>
+            <h2>Hash Table</h2>
+            <p>
+              O(1) average get/set/delete. Python: <code>dict</code>,
+              <code>Counter</code>, <code>defaultdict</code>, <code>set</code>.
+            </p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="
+                  background: rgba(122, 45, 122, 0.1);
+                  color: var(--c-hash);
+                "
+                >O(1) get/set avg</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(122, 45, 122, 0.1);
+                  color: var(--c-hash);
+                "
+                >O(n) space</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(122, 45, 122, 0.1);
+                  color: var(--c-hash);
+                "
+                >O(n) worst</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>How Hashing Works</h3>
+              <span class="card-tag">visual</span>
+            </div>
+            <p>
+              A hash function maps each key to a bucket index. Collisions are
+              resolved by chaining (linked list per bucket).
+            </p>
+            <div class="visual-box">
+              <div class="vis-label">
+                Hash table with 6 buckets — hash(key) % 6
+              </div>
+              <div class="hash-table-vis">
+                <div class="hash-row-vis">
+                  <div class="hash-idx-vis">0</div>
+                  <div class="hash-bucket empty">— empty —</div>
+                </div>
+                <div class="hash-row-vis">
+                  <div class="hash-idx-vis">1</div>
+                  <div class="hash-bucket filled">"name" → "Alice"</div>
+                </div>
+                <div class="hash-row-vis">
+                  <div class="hash-idx-vis">2</div>
+                  <div class="hash-bucket empty">— empty —</div>
+                </div>
+                <div class="hash-row-vis">
+                  <div class="hash-idx-vis">3</div>
+                  <div style="flex: 1">
+                    <div class="hash-bucket filled" style="margin-bottom: 2px">
+                      "age" → 25
+                    </div>
+                    <div class="hash-chain-vis">
+                      <span
+                        style="
+                          font-family: var(--mono);
+                          font-size: 10px;
+                          color: var(--ink4);
+                        "
+                        >chain:</span
+                      >
+                      <div class="hash-node-vis">"score"→90</div>
+                      <span style="color: var(--ink4)">→</span>
+                      <div class="hash-node-vis">None</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hash-row-vis">
+                  <div class="hash-idx-vis">4</div>
+                  <div class="hash-bucket filled">"city" → "Jakarta"</div>
+                </div>
+                <div class="hash-row-vis">
+                  <div class="hash-idx-vis">5</div>
+                  <div class="hash-bucket empty">— empty —</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Python dict</h3>
+              <span class="card-tag">implementation</span>
+            </div>
+            <pre><span class="cm"># Create</span>
+d = {}
+d = {<span class="st">'a'</span>: <span class="num">1</span>, <span class="st">'b'</span>: <span class="num">2</span>}
+
+<span class="cm"># Set / Get / Delete</span>
+d[<span class="st">'key'</span>] = <span class="st">'val'</span>           <span class="cm"># O(1)</span>
+val = d[<span class="st">'key'</span>]              <span class="cm"># O(1) KeyError if missing</span>
+val = d.get(<span class="st">'key'</span>, <span class="nm">None</span>)   <span class="cm"># safe default</span>
+<span class="kw">del</span> d[<span class="st">'key'</span>]               <span class="cm"># O(1)</span>
+
+<span class="cm"># Membership  ← O(1)!</span>
+<span class="st">'key'</span> <span class="kw">in</span> d
+
+<span class="cm"># Iterate</span>
+<span class="kw">for</span> k, v <span class="kw">in</span> d.items(): ...
+<span class="kw">for</span> k <span class="kw">in</span> d.keys():   ...
+<span class="kw">for</span> v <span class="kw">in</span> d.values(): ...
+
+<span class="cm"># Dict comprehension</span>
+inv = {v: k <span class="kw">for</span> k, v <span class="kw">in</span> d.items()}</pre>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Counter</h3>
+              <span class="card-tag">collections</span>
+            </div>
+            <pre><span class="kw">from</span> collections <span class="kw">import</span> Counter
+
+c = Counter(<span class="st">"banana"</span>)
+<span class="cm"># Counter({'a':3,'n':2,'b':1})</span>
+
+c[<span class="st">'x'</span>]            <span class="cm"># 0 (no KeyError!)</span>
+c.most_common(<span class="num">2</span>)   <span class="cm"># [('a',3),('n',2)]</span>
+<span class="cm"># Anagram check:</span>
+Counter(s1) == Counter(s2)
+<span class="cm"># Word frequency:</span>
+Counter(<span class="st">"the cat sat on the mat"</span>.split())</pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>defaultdict &amp; set</h3>
+              <span class="card-tag">collections</span>
+            </div>
+            <pre><span class="kw">from</span> collections <span class="kw">import</span> defaultdict
+
+d = defaultdict(list)
+d[<span class="st">"a"</span>].append(<span class="num">1</span>)  <span class="cm"># no KeyError!</span>
+
+d2 = defaultdict(int)
+d2[<span class="st">"x"</span>] += <span class="num">1</span>       <span class="cm"># auto-init 0</span>
+
+<span class="cm"># set: O(1) membership</span>
+s = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>}
+s.add(<span class="num">4</span>)
+s.discard(<span class="num">99</span>)    <span class="cm"># safe, no error</span>
+<span class="num">3</span> <span class="kw">in</span> s            <span class="cm"># O(1)!</span>
+a | b; a & b; a - b  <span class="cm"># union/intersect/diff</span></pre>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Classic: Two Sum — O(n)</h3>
+            <span class="card-tag">must know</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">two_sum</span>(nums, target):
+    seen = {}  <span class="cm"># value → index</span>
+    <span class="kw">for</span> i, n <span class="kw">in</span> <span class="fn">enumerate</span>(nums):
+        complement = target - n
+        <span class="kw">if</span> complement <span class="kw">in</span> seen:
+            <span class="kw">return</span> [seen[complement], i]
+        seen[n] = i
+    <span class="kw">return</span> []</pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">nums=[2,7,11,15], target=9</div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">[0, 1] (2+7=9)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Group Anagrams</h3>
+            <span class="card-tag">classic</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">group_anagrams</span>(strs):
+    groups = defaultdict(list)
+    <span class="kw">for</span> s <span class="kw">in</span> strs:
+        key = <span class="fn">tuple</span>(<span class="fn">sorted</span>(s))  <span class="cm"># canonical form</span>
+        groups[key].append(s)
+    <span class="kw">return</span> <span class="fn">list</span>(groups.values())</pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">["eat","tea","tan","ate","nat","bat"]</div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">
+                [["eat","tea","ate"],["tan","nat"],["bat"]]
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study">
+          <div class="case-tag">// Case Study</div>
+          <div class="case-title">Instagram: O(1) Username Lookup</div>
+          <div class="case-body">
+            Instagram stores usernames in a hash table. When you @mention
+            someone, it must check if they exist instantly — O(1) not O(n). With
+            2 billion users, O(n) would take seconds. The hash maps username →
+            user object. Password hashing is also a hash function — one-way
+            transformation for secure storage.
+          </div>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-hash"></div>
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Hash Table</div>
+          <div id="q-hash"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: TREES ═══════════ -->
+      <div class="section" id="sec-tree">
+        <div class="sec-header">
+          <div class="sec-num">06</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-tree)">
+              Data Structure
+            </div>
+            <h2>Trees &amp; BST</h2>
+            <p>
+              Hierarchical structure. Master all 4 traversals. BST: left &lt;
+              root &lt; right.
+            </p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="background: rgba(45, 122, 79, 0.1); color: var(--c-tree)"
+                >BST search O(log n)</span
+              >
+              <span
+                class="badge"
+                style="background: rgba(45, 122, 79, 0.1); color: var(--c-tree)"
+                >traversal O(n)</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>TreeNode &amp; Structure</h3>
+              <span class="card-tag">concept</span>
+            </div>
+            <div class="visual-box">
+              <div class="vis-label">BST — inorder gives sorted order!</div>
+              <svg
+                viewBox="0 0 300 200"
+                style="
+                  width: 100%;
+                  max-height: 160px;
+                  font-family: &quot;IBM Plex Mono&quot;, monospace;
+                "
+              >
+                <line
+                  x1="150"
+                  y1="40"
+                  x2="90"
+                  y2="90"
+                  stroke="#2d7a4f"
+                  stroke-width="1.5"
+                  opacity="0.5"
+                />
+                <line
+                  x1="150"
+                  y1="40"
+                  x2="210"
+                  y2="90"
+                  stroke="#2d7a4f"
+                  stroke-width="1.5"
+                  opacity="0.5"
+                />
+                <line
+                  x1="90"
+                  y1="90"
+                  x2="60"
+                  y2="140"
+                  stroke="#2d7a4f"
+                  stroke-width="1.5"
+                  opacity="0.5"
+                />
+                <line
+                  x1="90"
+                  y1="90"
+                  x2="120"
+                  y2="140"
+                  stroke="#2d7a4f"
+                  stroke-width="1.5"
+                  opacity="0.5"
+                />
+                <line
+                  x1="210"
+                  y1="90"
+                  x2="240"
+                  y2="140"
+                  stroke="#2d7a4f"
+                  stroke-width="1.5"
+                  opacity="0.5"
+                />
+                <circle
+                  cx="150"
+                  cy="40"
+                  r="22"
+                  fill="rgba(45,122,79,0.15)"
+                  stroke="#2d7a4f"
+                  stroke-width="2"
+                />
+                <text
+                  x="150"
+                  y="45"
+                  text-anchor="middle"
+                  fill="#2d7a4f"
+                  font-size="13"
+                  font-weight="700"
+                >
+                  8
+                </text>
+                <circle
+                  cx="90"
+                  cy="90"
+                  r="20"
+                  fill="rgba(45,122,79,0.1)"
+                  stroke="#2d7a4f"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="90"
+                  y="95"
+                  text-anchor="middle"
+                  fill="#2d7a4f"
+                  font-size="12"
+                  font-weight="700"
+                >
+                  4
+                </text>
+                <circle
+                  cx="210"
+                  cy="90"
+                  r="20"
+                  fill="rgba(45,122,79,0.1)"
+                  stroke="#2d7a4f"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="210"
+                  y="95"
+                  text-anchor="middle"
+                  fill="#2d7a4f"
+                  font-size="12"
+                  font-weight="700"
+                >
+                  12
+                </text>
+                <circle
+                  cx="60"
+                  cy="140"
+                  r="18"
+                  fill="rgba(45,122,79,0.08)"
+                  stroke="rgba(45,122,79,0.5)"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="60"
+                  y="145"
+                  text-anchor="middle"
+                  fill="#2d7a4f"
+                  font-size="11"
+                >
+                  2
+                </text>
+                <circle
+                  cx="120"
+                  cy="140"
+                  r="18"
+                  fill="rgba(45,122,79,0.08)"
+                  stroke="rgba(45,122,79,0.5)"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="120"
+                  y="145"
+                  text-anchor="middle"
+                  fill="#2d7a4f"
+                  font-size="11"
+                >
+                  6
+                </text>
+                <circle
+                  cx="240"
+                  cy="140"
+                  r="18"
+                  fill="rgba(45,122,79,0.08)"
+                  stroke="rgba(45,122,79,0.5)"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="240"
+                  y="145"
+                  text-anchor="middle"
+                  fill="#2d7a4f"
+                  font-size="11"
+                >
+                  15
+                </text>
+                <text
+                  x="150"
+                  y="185"
+                  text-anchor="middle"
+                  fill="#8a8aa0"
+                  font-size="10"
+                >
+                  Inorder: 2, 4, 6, 8, 12, 15 (sorted!)
+                </text>
+              </svg>
+            </div>
+            <pre><span class="kw">class</span> <span class="fn">TreeNode</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, val=<span class="num">0</span>, left=<span class="nm">None</span>, right=<span class="nm">None</span>):
+        self.val   = val
+        self.left  = left
+        self.right = right</pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>The 4 Traversals</h3>
+              <span class="card-tag">must memorize</span>
+            </div>
+            <pre><span class="cm"># INORDER:   Left → Root → Right (BST = sorted)</span>
+<span class="kw">def</span> <span class="fn">inorder</span>(root):
+    <span class="kw">if not</span> root: <span class="kw">return</span> []
+    <span class="kw">return</span> <span class="fn">inorder</span>(root.left)+[root.val]+<span class="fn">inorder</span>(root.right)
+
+<span class="cm"># PREORDER:  Root → Left → Right (copy tree)</span>
+<span class="kw">def</span> <span class="fn">preorder</span>(root):
+    <span class="kw">if not</span> root: <span class="kw">return</span> []
+    <span class="kw">return</span> [root.val]+<span class="fn">preorder</span>(root.left)+<span class="fn">preorder</span>(root.right)
+
+<span class="cm"># POSTORDER: Left → Right → Root (delete tree)</span>
+<span class="kw">def</span> <span class="fn">postorder</span>(root):
+    <span class="kw">if not</span> root: <span class="kw">return</span> []
+    <span class="kw">return</span> <span class="fn">postorder</span>(root.left)+<span class="fn">postorder</span>(root.right)+[root.val]
+
+<span class="cm"># LEVEL-ORDER: BFS with queue</span>
+<span class="kw">from</span> collections <span class="kw">import</span> deque
+<span class="kw">def</span> <span class="fn">level_order</span>(root):
+    <span class="kw">if not</span> root: <span class="kw">return</span> []
+    q, res = deque([root]), []
+    <span class="kw">while</span> q:
+        node = q.popleft(); res.append(node.val)
+        <span class="kw">if</span> node.left:  q.append(node.left)
+        <span class="kw">if</span> node.right: q.append(node.right)
+    <span class="kw">return</span> res</pre>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Max Depth &amp; LCA</h3>
+              <span class="card-tag">classic</span>
+            </div>
+            <pre><span class="kw">def</span> <span class="fn">max_depth</span>(root):
+    <span class="kw">if not</span> root: <span class="kw">return</span> <span class="num">0</span>
+    <span class="kw">return</span> <span class="num">1</span> + <span class="fn">max</span>(<span class="fn">max_depth</span>(root.left),
+                     <span class="fn">max_depth</span>(root.right))
+
+<span class="kw">def</span> <span class="fn">lca</span>(root, p, q):
+    <span class="kw">if not</span> root <span class="kw">or</span> root==p <span class="kw">or</span> root==q:
+        <span class="kw">return</span> root
+    left  = <span class="fn">lca</span>(root.left,  p, q)
+    right = <span class="fn">lca</span>(root.right, p, q)
+    <span class="kw">return</span> root <span class="kw">if</span> left <span class="kw">and</span> right <span class="kw">else</span> left <span class="kw">or</span> right</pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Validate BST</h3>
+              <span class="card-tag">classic</span>
+            </div>
+            <pre><span class="kw">def</span> <span class="fn">is_valid_bst</span>(root,
+    lo=<span class="fn">float</span>(<span class="st">'-inf'</span>), hi=<span class="fn">float</span>(<span class="st">'inf'</span>)):
+    <span class="kw">if not</span> root: <span class="kw">return True</span>
+    <span class="kw">if not</span> (lo &lt; root.val &lt; hi): <span class="kw">return False</span>
+    <span class="kw">return</span> (
+        <span class="fn">is_valid_bst</span>(root.left,  lo, root.val) <span class="kw">and</span>
+        <span class="fn">is_valid_bst</span>(root.right, root.val, hi)
+    )</pre>
+          </div>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-tree"></div>
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Trees</div>
+          <div id="q-tree"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: GRAPH ═══════════ -->
+      <div class="section" id="sec-graph">
+        <div class="sec-header">
+          <div class="sec-num">07</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-graph)">
+              Data Structure
+            </div>
+            <h2>Graph</h2>
+            <p>
+              Nodes + Edges. BFS = shortest path. DFS = exploration. Grid =
+              implicit graph.
+            </p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="
+                  background: rgba(42, 100, 150, 0.1);
+                  color: var(--c-graph);
+                "
+                >BFS O(V+E)</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(42, 100, 150, 0.1);
+                  color: var(--c-graph);
+                "
+                >DFS O(V+E)</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Representations</h3>
+              <span class="card-tag">concept</span>
+            </div>
+            <div class="graph-svg-wrap">
+              <svg viewBox="0 0 320 180" style="width: 100%" height="180">
+                <line
+                  x1="80"
+                  y1="55"
+                  x2="200"
+                  y2="55"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                  opacity="0.4"
+                />
+                <line
+                  x1="80"
+                  y1="55"
+                  x2="55"
+                  y2="135"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                  opacity="0.4"
+                />
+                <line
+                  x1="200"
+                  y1="55"
+                  x2="260"
+                  y2="135"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                  opacity="0.4"
+                />
+                <line
+                  x1="55"
+                  y1="135"
+                  x2="160"
+                  y2="160"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                  opacity="0.4"
+                />
+                <line
+                  x1="260"
+                  y1="135"
+                  x2="160"
+                  y2="160"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                  opacity="0.4"
+                />
+                <circle
+                  cx="80"
+                  cy="55"
+                  r="22"
+                  fill="rgba(42,100,150,0.15)"
+                  stroke="#2a6496"
+                  stroke-width="2"
+                />
+                <text
+                  x="80"
+                  y="60"
+                  text-anchor="middle"
+                  fill="#2a6496"
+                  font-family="IBM Plex Mono"
+                  font-size="12"
+                  font-weight="700"
+                >
+                  A
+                </text>
+                <circle
+                  cx="200"
+                  cy="55"
+                  r="22"
+                  fill="rgba(42,100,150,0.12)"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="200"
+                  y="60"
+                  text-anchor="middle"
+                  fill="#2a6496"
+                  font-family="IBM Plex Mono"
+                  font-size="12"
+                  font-weight="700"
+                >
+                  B
+                </text>
+                <circle
+                  cx="55"
+                  cy="135"
+                  r="20"
+                  fill="rgba(42,100,150,0.1)"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="55"
+                  y="140"
+                  text-anchor="middle"
+                  fill="#2a6496"
+                  font-family="IBM Plex Mono"
+                  font-size="12"
+                >
+                  C
+                </text>
+                <circle
+                  cx="260"
+                  cy="135"
+                  r="20"
+                  fill="rgba(42,100,150,0.1)"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="260"
+                  y="140"
+                  text-anchor="middle"
+                  fill="#2a6496"
+                  font-family="IBM Plex Mono"
+                  font-size="12"
+                >
+                  D
+                </text>
+                <circle
+                  cx="160"
+                  cy="160"
+                  r="20"
+                  fill="rgba(42,100,150,0.1)"
+                  stroke="#2a6496"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="160"
+                  y="165"
+                  text-anchor="middle"
+                  fill="#2a6496"
+                  font-family="IBM Plex Mono"
+                  font-size="12"
+                >
+                  E
+                </text>
+              </svg>
+            </div>
+            <pre><span class="cm"># Adjacency list — PREFERRED O(V+E) space</span>
+graph = {
+    <span class="st">'A'</span>: [<span class="st">'B'</span>, <span class="st">'C'</span>],
+    <span class="st">'B'</span>: [<span class="st">'A'</span>, <span class="st">'D'</span>],
+    <span class="st">'C'</span>: [<span class="st">'A'</span>, <span class="st">'E'</span>],
+    <span class="st">'D'</span>: [<span class="st">'B'</span>, <span class="st">'E'</span>],
+    <span class="st">'E'</span>: [<span class="st">'C'</span>, <span class="st">'D'</span>],
+}
+
+<span class="cm"># Build from edge list</span>
+<span class="kw">from</span> collections <span class="kw">import</span> defaultdict
+g = defaultdict(list)
+<span class="kw">for</span> u, v <span class="kw">in</span> edges:
+    g[u].append(v)
+    g[v].append(u)  <span class="cm"># undirected</span></pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>BFS vs DFS</h3>
+              <span class="card-tag">comparison</span>
+            </div>
+            <pre><span class="kw">from</span> collections <span class="kw">import</span> deque
+
+<span class="cm"># ── BFS — uses QUEUE ────────────────────</span>
+<span class="kw">def</span> <span class="fn">bfs</span>(graph, start):
+    visited = {start}
+    q = deque([start])
+    <span class="kw">while</span> q:
+        node = q.popleft()
+        <span class="kw">for</span> nb <span class="kw">in</span> graph[node]:
+            <span class="kw">if</span> nb <span class="kw">not in</span> visited:
+                visited.add(nb)
+                q.append(nb)
+
+<span class="cm"># ── DFS — uses STACK or recursion ───────</span>
+<span class="kw">def</span> <span class="fn">dfs</span>(graph, node, visited=<span class="nm">None</span>):
+    <span class="kw">if</span> visited <span class="kw">is None</span>: visited = set()
+    visited.add(node)
+    <span class="kw">for</span> nb <span class="kw">in</span> graph[node]:
+        <span class="kw">if</span> nb <span class="kw">not in</span> visited:
+            <span class="fn">dfs</span>(graph, nb, visited)
+    <span class="kw">return</span> visited</pre>
+            <div class="callout c-blue" style="margin-top: 10px">
+              <strong>BFS vs DFS Rule</strong>
+              BFS = shortest path, level-by-level, uses Queue<br />
+              DFS = explore fully, cycle detect, uses Stack/Recursion<br />
+              Grid problems → DFS usually simpler
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Number of Islands — Grid DFS</h3>
+            <span class="card-tag">must know</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">num_islands</span>(grid):
+    <span class="kw">if not</span> grid: <span class="kw">return</span> <span class="num">0</span>
+    rows, cols, count = <span class="fn">len</span>(grid), <span class="fn">len</span>(grid[<span class="num">0</span>]), <span class="num">0</span>
+
+    <span class="kw">def</span> <span class="fn">dfs</span>(r, c):
+        <span class="kw">if</span> r &lt; <span class="num">0</span> <span class="kw">or</span> r >= rows <span class="kw">or</span> c &lt; <span class="num">0</span> <span class="kw">or</span> c >= cols <span class="kw">or</span> grid[r][c] != <span class="st">'1'</span>: <span class="kw">return</span>
+        grid[r][c] = <span class="st">'0'</span>  <span class="cm"># mark visited</span>
+        <span class="kw">for</span> dr, dc <span class="kw">in</span> [(<span class="num">0</span>,<span class="num">1</span>),(<span class="num">0</span>,-<span class="num">1</span>),(<span class="num">1</span>,<span class="num">0</span>),(-<span class="num">1</span>,<span class="num">0</span>)]:
+            <span class="fn">dfs</span>(r+dr, c+dc)
+
+    <span class="kw">for</span> r <span class="kw">in</span> <span class="fn">range</span>(rows):
+        <span class="kw">for</span> c <span class="kw">in</span> <span class="fn">range</span>(cols):
+            <span class="kw">if</span> grid[r][c] == <span class="st">'1'</span>: <span class="fn">dfs</span>(r, c); count += <span class="num">1</span>
+    <span class="kw">return</span> count</pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">
+                [["1","1","0"],<br />
+                ["1","0","0"],<br />
+                ["0","0","1"]]
+              </div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">2<br />(two islands)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Detect Cycle &amp; Count Components</h3>
+            <span class="card-tag">patterns</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">count_components</span>(n, edges):
+    graph = defaultdict(list)
+    <span class="kw">for</span> u, v <span class="kw">in</span> edges:
+        graph[u].append(v); graph[v].append(u)
+    visited, count = set(), <span class="num">0</span>
+    <span class="kw">def</span> <span class="fn">dfs</span>(node):
+        visited.add(node)
+        <span class="kw">for</span> nb <span class="kw">in</span> graph[node]:
+            <span class="kw">if</span> nb <span class="kw">not in</span> visited: <span class="fn">dfs</span>(nb)
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(n):
+        <span class="kw">if</span> i <span class="kw">not in</span> visited: <span class="fn">dfs</span>(i); count += <span class="num">1</span>
+    <span class="kw">return</span> count</pre>
+        </div>
+
+        <div class="case-study">
+          <div class="case-tag">// Case Study</div>
+          <div class="case-title">LinkedIn: Degrees of Connection</div>
+          <div class="case-body">
+            "You are 2nd connection with Budi" — this is BFS on a social graph.
+            Each person is a node, friendships are edges. BFS from your profile
+            explores connections level by level: 1st degree (direct friends),
+            2nd degree (friends of friends), 3rd degree, etc. LinkedIn needs BFS
+            to stay under 3 degrees for the connection suggestion feature.
+          </div>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-graph"></div>
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Graph</div>
+          <div id="q-graph"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: SORTING ═══════════ -->
+      <div class="section" id="sec-sorting">
+        <div class="sec-header">
+          <div class="sec-num">08</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-sorting)">Algorithm</div>
+            <h2>Sorting</h2>
+            <p>
+              Know every complexity cold. Python's built-in sort is Timsort —
+              O(n log n) always.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Complexity Table — MEMORIZE</h3>
+            <span class="card-tag">critical</span>
+          </div>
+          <table class="ctable">
+            <tr>
+              <th>Algorithm</th>
+              <th>Best</th>
+              <th>Average</th>
+              <th>Worst</th>
+              <th>Space</th>
+              <th>Stable?</th>
+            </tr>
+            <tr>
+              <td>Bubble Sort</td>
+              <td class="on">O(n)</td>
+              <td class="on2">O(n²)</td>
+              <td class="on2">O(n²)</td>
+              <td>O(1)</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Selection Sort</td>
+              <td class="on2">O(n²)</td>
+              <td class="on2">O(n²)</td>
+              <td class="on2">O(n²)</td>
+              <td>O(1)</td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td>Insertion Sort</td>
+              <td class="on">O(n)</td>
+              <td class="on2">O(n²)</td>
+              <td class="on2">O(n²)</td>
+              <td>O(1)</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Merge Sort</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="on">O(n)</td>
+              <td>✅</td>
+            </tr>
+            <tr>
+              <td>Quick Sort</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="on2">O(n²)</td>
+              <td class="ologn">O(log n)</td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td>Heap Sort</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="ologn">O(n log n)</td>
+              <td>O(1)</td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td><strong>Python sort()</strong></td>
+              <td class="on">O(n)</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="ologn">O(n log n)</td>
+              <td class="on">O(n)</td>
+              <td>✅</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Merge Sort</h3>
+              <span class="card-tag">stable, guaranteed O(n log n)</span>
+            </div>
+            <pre><span class="kw">def</span> <span class="fn">merge_sort</span>(arr):
+    <span class="kw">if</span> <span class="fn">len</span>(arr) &lt;= <span class="num">1</span>: <span class="kw">return</span> arr
+    mid   = <span class="fn">len</span>(arr) // <span class="num">2</span>
+    left  = <span class="fn">merge_sort</span>(arr[:mid])
+    right = <span class="fn">merge_sort</span>(arr[mid:])
+    <span class="kw">return</span> <span class="fn">_merge</span>(left, right)
+
+<span class="kw">def</span> <span class="fn">_merge</span>(l, r):
+    res, i, j = [], <span class="num">0</span>, <span class="num">0</span>
+    <span class="kw">while</span> i &lt; <span class="fn">len</span>(l) <span class="kw">and</span> j &lt; <span class="fn">len</span>(r):
+        <span class="kw">if</span> l[i] &lt;= r[j]: res.append(l[i]); i += <span class="num">1</span>
+        <span class="kw">else</span>:             res.append(r[j]); j += <span class="num">1</span>
+    <span class="kw">return</span> res + l[i:] + r[j:]</pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Python Built-in Sort</h3>
+              <span class="card-tag">practical</span>
+            </div>
+            <pre><span class="cm"># Always use this in interviews!</span>
+arr.sort()              <span class="cm"># in-place</span>
+<span class="fn">sorted</span>(arr)             <span class="cm"># new list</span>
+
+<span class="cm"># Sort descending</span>
+arr.sort(reverse=<span class="nm">True</span>)
+
+<span class="cm"># Sort by key</span>
+words.sort(key=<span class="fn">len</span>)
+arr.sort(key=<span class="kw">lambda</span> x: x[<span class="num">1</span>])
+
+<span class="cm"># Multi-key sort</span>
+students.sort(key=<span class="kw">lambda</span> x: (-x.grade, x.name))
+
+<span class="cm"># Custom comparator (Python 3)</span>
+<span class="kw">from</span> functools <span class="kw">import</span> cmp_to_key
+<span class="kw">def</span> <span class="fn">cmp</span>(a, b): <span class="kw">return</span> <span class="num">-1</span> <span class="kw">if</span> a+b > b+a <span class="kw">else</span> <span class="num">1</span>
+nums.sort(key=cmp_to_key(cmp))</pre>
+          </div>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-sorting"></div>
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Sorting</div>
+          <div id="q-sorting"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: BINARY SEARCH ═══════════ -->
+      <div class="section" id="sec-search">
+        <div class="sec-header">
+          <div class="sec-num">09</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-search)">Algorithm</div>
+            <h2>Binary Search</h2>
+            <p>O(log n). Requires sorted input. Know the template by heart.</p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="
+                  background: rgba(122, 45, 122, 0.1);
+                  color: var(--c-search);
+                "
+                >O(log n) time</span
+              >
+              <span
+                class="badge"
+                style="
+                  background: rgba(122, 45, 122, 0.1);
+                  color: var(--c-search);
+                "
+                >O(1) space</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Core Template</h3>
+              <span class="card-tag">memorize</span>
+            </div>
+            <pre><span class="kw">def</span> <span class="fn">binary_search</span>(arr, target):
+    left, right = <span class="num">0</span>, <span class="fn">len</span>(arr) - <span class="num">1</span>
+    <span class="kw">while</span> left &lt;= right:
+        mid = (left + right) // <span class="num">2</span>
+        <span class="kw">if</span>   arr[mid] == target: <span class="kw">return</span> mid
+        <span class="kw">elif</span> arr[mid] &lt;  target: left  = mid + <span class="num">1</span>
+        <span class="kw">else</span>:                    right = mid - <span class="num">1</span>
+    <span class="kw">return</span> -<span class="num">1</span>  <span class="cm"># not found</span></pre>
+            <div class="io-grid">
+              <div class="io-box io-in">
+                <div class="io-label">Input</div>
+                <div class="io-val">arr=[1,3,5,7,9,11], target=7</div>
+              </div>
+              <div class="io-box io-out">
+                <div class="io-label">Output</div>
+                <div class="io-val">3 (index of 7)</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Find First &amp; Last Position</h3>
+              <span class="card-tag">variant</span>
+            </div>
+            <pre><span class="kw">def</span> <span class="fn">find_first</span>(arr, target):
+    l, r, res = <span class="num">0</span>, <span class="fn">len</span>(arr)-<span class="num">1</span>, -<span class="num">1</span>
+    <span class="kw">while</span> l &lt;= r:
+        m = (l + r) // <span class="num">2</span>
+        <span class="kw">if</span> arr[m] == target: res = m; r = m - <span class="num">1</span>
+        <span class="kw">elif</span> arr[m] &lt; target: l = m + <span class="num">1</span>
+        <span class="kw">else</span>: r = m - <span class="num">1</span>
+    <span class="kw">return</span> res</pre>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Search in Rotated Sorted Array</h3>
+            <span class="card-tag">hard variant</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">search_rotated</span>(nums, target):
+    l, r = <span class="num">0</span>, <span class="fn">len</span>(nums) - <span class="num">1</span>
+    <span class="kw">while</span> l &lt;= r:
+        m = (l + r) // <span class="num">2</span>
+        <span class="kw">if</span> nums[m] == target: <span class="kw">return</span> m
+        <span class="kw">if</span> nums[l] &lt;= nums[m]:          <span class="cm"># left half is sorted</span>
+            <span class="kw">if</span> nums[l] &lt;= target &lt; nums[m]: r = m - <span class="num">1</span>
+            <span class="kw">else</span>: l = m + <span class="num">1</span>
+        <span class="kw">else</span>:                           <span class="cm"># right half is sorted</span>
+            <span class="kw">if</span> nums[m] &lt; target &lt;= nums[r]: l = m + <span class="num">1</span>
+            <span class="kw">else</span>: r = m - <span class="num">1</span>
+    <span class="kw">return</span> -<span class="num">1</span></pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">nums=[4,5,6,7,0,1,2], target=0</div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">4 (index of 0)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-search"></div>
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Binary Search</div>
+          <div id="q-search"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: DP ═══════════ -->
+      <div class="section" id="sec-dp">
+        <div class="sec-header">
+          <div class="sec-num">10</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-dp)">Algorithm</div>
+            <h2>Dynamic Programming</h2>
+            <p>
+              Recursion + Memoization. Break problems into overlapping
+              subproblems.
+            </p>
+            <div class="sec-badges">
+              <span
+                class="badge"
+                style="background: rgba(45, 122, 79, 0.1); color: var(--c-dp)"
+                >Optimal substructure</span
+              >
+              <span
+                class="badge"
+                style="background: rgba(45, 122, 79, 0.1); color: var(--c-dp)"
+                >Overlapping subproblems</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>The Two Approaches</h3>
+              <span class="card-tag">concept</span>
+            </div>
+            <pre><span class="cm"># ── TOP-DOWN (Memoization) ───────────────</span>
+<span class="kw">from</span> functools <span class="kw">import</span> lru_cache
+
+<span class="dec">@lru_cache</span>(maxsize=<span class="nm">None</span>)
+<span class="kw">def</span> <span class="fn">fib</span>(n):
+    <span class="kw">if</span> n &lt;= <span class="num">1</span>: <span class="kw">return</span> n
+    <span class="kw">return</span> <span class="fn">fib</span>(n-<span class="num">1</span>) + <span class="fn">fib</span>(n-<span class="num">2</span>)
+<span class="cm"># Time: O(n)   Space: O(n)</span>
+
+<span class="cm"># ── BOTTOM-UP (Tabulation) ───────────────</span>
+<span class="kw">def</span> <span class="fn">fib_bu</span>(n):
+    <span class="kw">if</span> n &lt;= <span class="num">1</span>: <span class="kw">return</span> n
+    dp = [<span class="num">0</span>] * (n+<span class="num">1</span>)
+    dp[<span class="num">1</span>] = <span class="num">1</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, n+<span class="num">1</span>):
+        dp[i] = dp[i-<span class="num">1</span>] + dp[i-<span class="num">2</span>]
+    <span class="kw">return</span> dp[n]
+
+<span class="cm"># Space-optimized O(1):</span>
+<span class="kw">def</span> <span class="fn">fib_opt</span>(n):
+    a, b = <span class="num">0</span>, <span class="num">1</span>
+    <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(n): a, b = b, a+b
+    <span class="kw">return</span> a</pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Climbing Stairs — DP Table</h3>
+              <span class="card-tag">visual</span>
+            </div>
+            <p>
+              Ways to climb n stairs taking 1 or 2 steps. Same recurrence as
+              Fibonacci!
+            </p>
+            <div class="visual-box" style="overflow-x: auto">
+              <div class="vis-label">dp[i] = dp[i-1] + dp[i-2]</div>
+              <table class="dp-table">
+                <tr>
+                  <th>n</th>
+                  <th>0</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                  <th>6</th>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                      font-family: var(--mono);
+                      font-size: 11px;
+                      color: var(--ink4);
+                    "
+                  >
+                    ways
+                  </td>
+                  <td class="dp-base">1</td>
+                  <td class="dp-base">1</td>
+                  <td class="dp-fill">2</td>
+                  <td class="dp-fill">3</td>
+                  <td class="dp-fill">5</td>
+                  <td class="dp-fill">8</td>
+                  <td class="dp-ans">13</td>
+                </tr>
+              </table>
+            </div>
+            <pre><span class="kw">def</span> <span class="fn">climb_stairs</span>(n):
+    <span class="kw">if</span> n &lt;= <span class="num">2</span>: <span class="kw">return</span> n
+    a, b = <span class="num">1</span>, <span class="num">2</span>
+    <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">3</span>, n+<span class="num">1</span>):
+        a, b = b, a + b
+    <span class="kw">return</span> b</pre>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Coin Change — Bottom-Up DP</h3>
+            <span class="card-tag">classic</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">coin_change</span>(coins, amount):
+    dp = [<span class="fn">float</span>(<span class="st">'inf'</span>)] * (amount + <span class="num">1</span>)
+    dp[<span class="num">0</span>] = <span class="num">0</span>   <span class="cm"># base: 0 coins for amount 0</span>
+    <span class="kw">for</span> a <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, amount + <span class="num">1</span>):
+        <span class="kw">for</span> c <span class="kw">in</span> coins:
+            <span class="kw">if</span> c &lt;= a:
+                dp[a] = <span class="fn">min</span>(dp[a], dp[a - c] + <span class="num">1</span>)
+    <span class="kw">return</span> dp[amount] <span class="kw">if</span> dp[amount] != <span class="fn">float</span>(<span class="st">'inf'</span>) <span class="kw">else</span> -<span class="num">1</span></pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">coins=[1,5,6,9], amount=11</div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">2 (5+6=11)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Longest Common Subsequence (LCS) — 2D DP</h3>
+            <span class="card-tag">classic 2D</span>
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">lcs</span>(s1, s2):
+    m, n = <span class="fn">len</span>(s1), <span class="fn">len</span>(s2)
+    dp = [[<span class="num">0</span>]*(n+<span class="num">1</span>) <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(m+<span class="num">1</span>)]
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, m+<span class="num">1</span>):
+        <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, n+<span class="num">1</span>):
+            <span class="kw">if</span> s1[i-<span class="num">1</span>] == s2[j-<span class="num">1</span>]:
+                dp[i][j] = dp[i-<span class="num">1</span>][j-<span class="num">1</span>] + <span class="num">1</span>
+            <span class="kw">else</span>:
+                dp[i][j] = <span class="fn">max</span>(dp[i-<span class="num">1</span>][j], dp[i][j-<span class="num">1</span>])
+    <span class="kw">return</span> dp[m][n]</pre>
+          <div class="io-grid">
+            <div class="io-box io-in">
+              <div class="io-label">Input</div>
+              <div class="io-val">s1="ABCBDAB"<br />s2="BDCAB"</div>
+            </div>
+            <div class="io-box io-out">
+              <div class="io-label">Output</div>
+              <div class="io-val">4<br />("BCAB")</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout c-green">
+          <strong>🧠 DP Checklist</strong>
+          1. Can I define f(n) in terms of smaller inputs? → subproblem<br />
+          2. Are subproblems computed multiple times? → overlapping<br />
+          3. What is my base case? → where recursion stops<br />
+          4. Top-down (memo with @lru_cache) or bottom-up (dp[] array)?
+        </div>
+
+        <div class="case-study">
+          <div class="case-tag">// Case Study</div>
+          <div class="case-title">Autocorrect: Edit Distance (Levenshtein)</div>
+          <div class="case-body">
+            When you type "helo" and your phone suggests "hello", it's computing
+            the edit distance — minimum insertions, deletions, substitutions to
+            transform one string to another. This is a 2D DP problem (dp[i][j] =
+            edit distance of s1[:i] and s2[:j]). Every major NLP system uses
+            this under the hood.
+          </div>
+          <pre><span class="kw">def</span> <span class="fn">min_distance</span>(w1, w2):
+    m, n = <span class="fn">len</span>(w1), <span class="fn">len</span>(w2)
+    dp = [[i+j <span class="kw">if</span> i*j==<span class="num">0</span> <span class="kw">else</span> <span class="num">0</span> <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(n+<span class="num">1</span>)] <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(m+<span class="num">1</span>)]
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, m+<span class="num">1</span>):
+        <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, n+<span class="num">1</span>):
+            <span class="kw">if</span> w1[i-<span class="num">1</span>]==w2[j-<span class="num">1</span>]: dp[i][j] = dp[i-<span class="num">1</span>][j-<span class="num">1</span>]
+            <span class="kw">else</span>: dp[i][j] = <span class="num">1</span> + <span class="fn">min</span>(dp[i-<span class="num">1</span>][j], dp[i][j-<span class="num">1</span>], dp[i-<span class="num">1</span>][j-<span class="num">1</span>])
+    <span class="kw">return</span> dp[m][n]
+<span class="cm"># min_distance("horse","ros") → 3</span></pre>
+        </div>
+
+        <div class="div-label">Q &amp; A</div>
+        <div id="qna-dp"></div>
+        <div class="quiz-box">
+          <div class="quiz-title">Quick Quiz — Dynamic Programming</div>
+          <div id="q-dp"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SECTION: PYTHON TIPS ═══════════ -->
+      <div class="section" id="sec-python">
+        <div class="sec-header">
+          <div class="sec-num">11</div>
+          <div class="sec-meta">
+            <div class="sec-tag" style="color: var(--c-python)">Language</div>
+            <h2>Python Syntax Tips</h2>
+            <p>
+              Master these patterns and you'll code faster, cleaner, and more
+              correctly in every interview.
+            </p>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Comprehensions</h3>
+              <span class="card-tag">pythonic</span>
+            </div>
+            <pre><span class="cm"># List comprehension</span>
+evens = [x**<span class="num">2</span> <span class="kw">for</span> x <span class="kw">in</span> <span class="fn">range</span>(<span class="num">10</span>) <span class="kw">if</span> x%<span class="num">2</span>==<span class="num">0</span>]
+<span class="cm"># [0, 4, 16, 36, 64]</span>
+
+<span class="cm"># Dict comprehension</span>
+inv = {v: k <span class="kw">for</span> k, v <span class="kw">in</span> d.items()}
+
+<span class="cm"># Set comprehension</span>
+unique_mods = {x % <span class="num">3</span> <span class="kw">for</span> x <span class="kw">in</span> nums}
+
+<span class="cm"># Nested — flatten 2D list</span>
+flat = [x <span class="kw">for</span> row <span class="kw">in</span> matrix <span class="kw">for</span> x <span class="kw">in</span> row]
+
+<span class="cm"># 2D grid</span>
+grid = [[<span class="num">0</span>]*cols <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(rows)]
+<span class="cm"># ⚠️ NOT: [[0]*cols]*rows — shares references!</span></pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>enumerate &amp; zip</h3>
+              <span class="card-tag">essential</span>
+            </div>
+            <pre><span class="cm"># enumerate: index + value</span>
+<span class="kw">for</span> i, val <span class="kw">in</span> <span class="fn">enumerate</span>([<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>]):
+    <span class="fn">print</span>(i, val)  <span class="cm"># 0 a, 1 b, 2 c</span>
+
+<span class="kw">for</span> i, val <span class="kw">in</span> <span class="fn">enumerate</span>(arr, start=<span class="num">1</span>): ...
+
+<span class="cm"># zip: pair two sequences</span>
+<span class="kw">for</span> a, b <span class="kw">in</span> <span class="fn">zip</span>(list1, list2): ...
+
+<span class="cm"># Transpose matrix</span>
+T = <span class="fn">list</span>(<span class="fn">zip</span>(*matrix))
+
+<span class="cm"># zip to make dict</span>
+d = <span class="fn">dict</span>(<span class="fn">zip</span>(keys, values))
+
+<span class="cm"># zip_longest: fills missing with default</span>
+<span class="kw">from</span> itertools <span class="kw">import</span> zip_longest
+<span class="kw">for</span> a, b <span class="kw">in</span> zip_longest(l1, l2, fillvalue=<span class="num">0</span>): ...</pre>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>String Methods</h3>
+              <span class="card-tag">strings</span>
+            </div>
+            <pre>s = <span class="st">"  Hello, World!  "</span>
+s.strip()           <span class="cm"># "Hello, World!"</span>
+s.lower()           <span class="cm"># "  hello, world!  "</span>
+s.upper()
+s.split(<span class="st">","</span>)        <span class="cm"># ["  Hello", " World!  "]</span>
+s.split()           <span class="cm"># ["Hello,","World!"] any whitespace</span>
+<span class="st">" "</span>.join([<span class="st">'a'</span>,<span class="st">'b'</span>]) <span class="cm"># "a b"</span>
+s.replace(<span class="st">"l"</span>,<span class="st">"r"</span>)  <span class="cm"># "  Herro, Worrd!  "</span>
+s.find(<span class="st">"World"</span>)     <span class="cm"># 9 (-1 if not found)</span>
+s.count(<span class="st">"l"</span>)        <span class="cm"># 3</span>
+s.startswith(<span class="st">"  H"</span>)  <span class="cm"># True</span>
+s.isdigit()         <span class="cm"># False</span>
+s.isalpha()         <span class="cm"># False</span>
+<span class="st">""</span>.join(<span class="fn">reversed</span>(s)) <span class="cm"># reverse</span>
+s[::-<span class="num">1</span>]             <span class="cm"># reverse (faster)</span></pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Useful Built-ins</h3>
+              <span class="card-tag">must know</span>
+            </div>
+            <pre><span class="cm"># min / max with key</span>
+<span class="fn">min</span>(words, key=<span class="fn">len</span>)
+<span class="fn">max</span>(nums, key=<span class="kw">lambda</span> x: x[<span class="num">1</span>])
+
+<span class="cm"># any / all</span>
+<span class="fn">any</span>(x > <span class="num">0</span> <span class="kw">for</span> x <span class="kw">in</span> nums)  <span class="cm"># any positive?</span>
+<span class="fn">all</span>(x > <span class="num">0</span> <span class="kw">for</span> x <span class="kw">in</span> nums)  <span class="cm"># all positive?</span>
+
+<span class="cm"># sum with generator</span>
+<span class="fn">sum</span>(x**<span class="num">2</span> <span class="kw">for</span> x <span class="kw">in</span> nums)
+
+<span class="cm"># abs, divmod, pow</span>
+<span class="fn">abs</span>(-<span class="num">5</span>)          <span class="cm"># 5</span>
+<span class="fn">divmod</span>(<span class="num">10</span>, <span class="num">3</span>)    <span class="cm"># (3, 1)  quotient, remainder</span>
+<span class="fn">pow</span>(<span class="num">2</span>, <span class="num">10</span>, <span class="num">1000</span>) <span class="cm"># 2^10 % 1000  (fast modular)</span>
+
+<span class="cm"># map / filter</span>
+<span class="fn">list</span>(<span class="fn">map</span>(<span class="fn">int</span>, [<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>]))
+<span class="fn">list</span>(<span class="fn">filter</span>(<span class="nm">None</span>, [<span class="num">0</span>,<span class="num">1</span>,<span class="nm">None</span>,<span class="st">"a"</span>]))  <span class="cm"># [1,"a"]</span></pre>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="card">
+            <div class="card-header">
+              <h3>heapq — Min/Max Heap</h3>
+              <span class="card-tag">collections</span>
+            </div>
+            <pre><span class="kw">import</span> heapq
+
+heap = [<span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">1</span>, <span class="num">5</span>]
+heapq.heapify(heap)        <span class="cm"># O(n) min-heap</span>
+heapq.heappush(heap, <span class="num">2</span>)   <span class="cm"># O(log n)</span>
+heapq.heappop(heap)        <span class="cm"># O(log n) — pops MIN</span>
+heap[<span class="num">0</span>]                    <span class="cm"># peek min — O(1)</span>
+heapq.nlargest(<span class="num">3</span>, arr)     <span class="cm"># top 3 largest</span>
+heapq.nsmallest(<span class="num">3</span>, arr)    <span class="cm"># top 3 smallest</span>
+
+<span class="cm"># MAX HEAP: negate values</span>
+heapq.heappush(heap, -val)
+max_val = -heapq.heappop(heap)</pre>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>itertools &amp; math</h3>
+              <span class="card-tag">stdlib</span>
+            </div>
+            <pre><span class="kw">import</span> math
+math.gcd(<span class="num">12</span>, <span class="num">8</span>)     <span class="cm"># 4</span>
+math.lcm(<span class="num">4</span>, <span class="num">6</span>)      <span class="cm"># 12  (Python 3.9+)</span>
+math.ceil(<span class="num">3.2</span>)      <span class="cm"># 4</span>
+math.floor(<span class="num">3.8</span>)     <span class="cm"># 3</span>
+math.isqrt(<span class="num">17</span>)      <span class="cm"># 4  (integer sqrt)</span>
+math.inf            <span class="cm"># ∞</span>
+
+<span class="kw">from</span> itertools <span class="kw">import</span> permutations, combinations, product
+<span class="fn">list</span>(<span class="fn">permutations</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>]))      <span class="cm"># all perms</span>
+<span class="fn">list</span>(<span class="fn">combinations</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>], <span class="num">2</span>))   <span class="cm"># C(3,2)</span>
+<span class="fn">list</span>(<span class="fn">product</span>([<span class="num">0</span>,<span class="num">1</span>], repeat=<span class="num">3</span>))   <span class="cm"># 0/1 combos</span>
+
+<span class="kw">from</span> collections <span class="kw">import</span> OrderedDict
+od = OrderedDict()  <span class="cm"># insertion-order dict</span></pre>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Python Traps — Common Mistakes</h3>
+            <span class="card-tag">⚠️ watch out</span>
+          </div>
+          <pre><span class="cm"># TRAP 1: Mutable default argument</span>
+<span class="kw">def</span> <span class="fn">bad</span>(lst=[]): lst.append(<span class="num">1</span>)  <span class="cm"># ❌ persists!</span>
+<span class="kw">def</span> <span class="fn">good</span>(lst=<span class="nm">None</span>):              <span class="cm"># ✅</span>
+    <span class="kw">if</span> lst <span class="kw">is None</span>: lst = []
+
+<span class="cm"># TRAP 2: Shallow copy</span>
+a = [[<span class="num">0</span>]*<span class="num">3</span>]*<span class="num">3</span>    <span class="cm"># ❌ all rows are same object!</span>
+a = [[<span class="num">0</span>]*<span class="num">3</span> <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">3</span>)]  <span class="cm"># ✅</span>
+
+<span class="cm"># TRAP 3: Integer division</span>
+<span class="num">7</span> / <span class="num">2</span>   <span class="cm"># 3.5  (float)</span>
+<span class="num">7</span> // <span class="num">2</span>  <span class="cm"># 3    (floor div)</span>
+-<span class="num">7</span> // <span class="num">2</span> <span class="cm"># -4   (floors toward -∞!)</span>
+<span class="fn">int</span>(-<span class="num">7</span>/<span class="num">2</span>) <span class="cm"># -3  (truncates toward 0)</span>
+
+<span class="cm"># TRAP 4: Float comparison</span>
+<span class="num">0.1</span> + <span class="num">0.2</span> == <span class="num">0.3</span>  <span class="cm"># False!</span>
+<span class="fn">abs</span>(<span class="num">0.1</span>+<span class="num">0.2</span>-<span class="num">0.3</span>) &lt; <span class="num">1e-9</span>  <span class="cm"># True ✅</span>
+
+<span class="cm"># TRAP 5: Modifying list while iterating</span>
+<span class="kw">for</span> x <span class="kw">in</span> arr[:]:   <span class="cm"># ✅ iterate over copy</span>
+    <span class="kw">if</span> x &lt; <span class="num">0</span>: arr.remove(x)</pre>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Bit Manipulation Quick Reference</h3>
+            <span class="card-tag">bits</span>
+          </div>
+          <pre><span class="cm"># Operators: & | ^ ~ << >></span>
+n & <span class="num">1</span>              <span class="cm"># check if odd</span>
+(n & (n-<span class="num">1</span>)) == <span class="num">0</span>  <span class="cm"># check power of 2</span>
+n ^ n              <span class="cm"># 0 (cancel same)</span>
+n ^ <span class="num">0</span>              <span class="cm"># n (identity)</span>
+n << <span class="num">1</span>             <span class="cm"># n * 2</span>
+n >> <span class="num">1</span>             <span class="cm"># n // 2</span>
+(n >> i) & <span class="num">1</span>      <span class="cm"># get i-th bit</span>
+n | (<span class="num">1</span> << i)      <span class="cm"># set i-th bit</span>
+n & ~(<span class="num">1</span> << i)     <span class="cm"># clear i-th bit</span>
+bin(n).count(<span class="st">'1'</span>) <span class="cm"># count set bits</span>
+
+<span class="cm"># Find single number (all others appear twice):</span>
+<span class="kw">from</span> functools <span class="kw">import</span> reduce
+result = reduce(<span class="kw">lambda</span> a,b: a^b, nums)</pre>
+        </div>
+
+        <div class="div-label">Top Tips</div>
+
+        <div class="tip-box">
+          <div class="tip-num">01</div>
+          <div class="tip-content">
+            <h4>
+              Use <code>x in set</code>, never <code>x in list</code>, for
+              repeated lookups
+            </h4>
+            <p>
+              <code>x in list</code> is O(n) — it scans every element.
+              <code>x in set</code> is O(1). If you need repeated membership
+              checks, convert to a set first: <code>seen = set(nums)</code>.
+            </p>
+          </div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-num">02</div>
+          <div class="tip-content">
+            <h4>
+              Use <code>deque</code> not <code>list</code> for queue operations
+            </h4>
+            <p>
+              <code>list.pop(0)</code> is O(n) because it shifts all elements.
+              <code>deque.popleft()</code> is O(1). This matters in BFS — using
+              a list as a queue makes BFS O(n²) instead of O(V+E).
+            </p>
+          </div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-num">03</div>
+          <div class="tip-content">
+            <h4>
+              Use <code>@lru_cache</code> to instantly memoize any recursive
+              function
+            </h4>
+            <p>
+              <code>from functools import lru_cache</code> then decorate with
+              <code>@lru_cache(maxsize=None)</code>. Turns any naive O(2^n)
+              recursion into O(n) automatically. Only works on hashable
+              arguments (no lists — use tuples).
+            </p>
+          </div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-num">04</div>
+          <div class="tip-content">
+            <h4>Tuple unpacking for clean swaps and multi-returns</h4>
+            <p>
+              <code>a, b = b, a</code> swaps without a temp variable. Functions
+              can return multiple values: <code>return lo, hi</code> and unpack
+              with <code>lo, hi = func()</code>. Also:
+              <code>first, *rest = arr</code> unpacks head and tail.
+            </p>
+          </div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-num">05</div>
+          <div class="tip-content">
+            <h4>
+              <code>float('inf')</code> and <code>float('-inf')</code> as
+              sentinels
+            </h4>
+            <p>
+              Use <code>float('inf')</code> to initialize "minimum so far"
+              tracking, or as the default in DP tables (impossible state).
+              Python integers don't overflow, but <code>inf</code> compares
+              correctly with all numbers.
+            </p>
+          </div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-num">06</div>
+          <div class="tip-content">
+            <h4>
+              Walrus operator <code>:=</code> for loop conditions (Python 3.8+)
+            </h4>
+            <p>
+              <code>while chunk := f.read(8192):</code> or
+              <code>if m := pattern.search(text):</code>. Assigns and evaluates
+              in one step. Useful in BFS/DFS when checking and storing
+              simultaneously.
+            </p>
+          </div>
+        </div>
+
+        <div class="div-label">Big-O Master Reference</div>
+        <div class="card">
+          <table class="ctable">
+            <tr>
+              <th>Structure</th>
+              <th>Access</th>
+              <th>Search</th>
+              <th>Insert</th>
+              <th>Delete</th>
+              <th>Space</th>
+            </tr>
+            <tr>
+              <td>list (array)</td>
+              <td class="o1">O(1)</td>
+              <td class="on">O(n)</td>
+              <td class="on">O(n)</td>
+              <td class="on">O(n)</td>
+              <td class="on">O(n)</td>
+            </tr>
+            <tr>
+              <td>list.append</td>
+              <td>—</td>
+              <td>—</td>
+              <td class="o1">O(1)*</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>dict / set</td>
+              <td>—</td>
+              <td class="o1">O(1)*</td>
+              <td class="o1">O(1)*</td>
+              <td class="o1">O(1)*</td>
+              <td class="on">O(n)</td>
+            </tr>
+            <tr>
+              <td>deque</td>
+              <td class="on">O(n)</td>
+              <td class="on">O(n)</td>
+              <td class="o1">O(1)</td>
+              <td class="o1">O(1)</td>
+              <td class="on">O(n)</td>
+            </tr>
+            <tr>
+              <td>heap (heapq)</td>
+              <td class="o1">O(1) min</td>
+              <td class="on">O(n)</td>
+              <td class="ologn">O(log n)</td>
+              <td class="ologn">O(log n)</td>
+              <td class="on">O(n)</td>
+            </tr>
+            <tr>
+              <td>BST (balanced)</td>
+              <td>—</td>
+              <td class="ologn">O(log n)</td>
+              <td class="ologn">O(log n)</td>
+              <td class="ologn">O(log n)</td>
+              <td class="on">O(n)</td>
+            </tr>
+            <tr>
+              <td>Linked List</td>
+              <td class="on">O(n)</td>
+              <td class="on">O(n)</td>
+              <td class="o1">O(1)</td>
+              <td class="o1">O(1)</td>
+              <td class="on">O(n)</td>
+            </tr>
+          </table>
+          <p
+            style="
+              font-family: var(--mono);
+              font-size: 10px;
+              color: var(--ink4);
+              margin-top: 8px;
+            "
+          >
+            * = amortized average. Worst case hash = O(n).
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // ══════════════════════════════════════════════════
+      // DATA
+      // ══════════════════════════════════════════════════
+      const data = {
+        qna: {
+          array: [
+            {
+              q: "What is the time complexity of arr[i] in Python?",
+              a: "O(1) — Python lists are backed by contiguous memory blocks, so index access is constant time regardless of size.",
+            },
+            {
+              q: "Why is arr.insert(0, x) slow?",
+              a: "It's O(n) because all existing elements must shift one position to the right to make room at index 0. Use deque.appendleft() if you need O(1) front insertions.",
+            },
+            {
+              q: "What's the difference between arr.sort() and sorted(arr)?",
+              a: "arr.sort() modifies the list in-place and returns None. sorted(arr) creates a new sorted list and leaves the original unchanged. Both use Timsort: O(n log n).",
+            },
+            {
+              q: "When should you use a prefix sum array?",
+              a: "When you need to answer multiple range sum queries. Precompute prefix[i] = sum(arr[:i]). Then sum(arr[l:r]) = prefix[r] - prefix[l] in O(1). Without it, each query is O(n).",
+            },
+          ],
+          linked: [
+            {
+              q: "Why use a dummy head node in linked list problems?",
+              a: "It eliminates special-casing the head node. If the head gets deleted or changed, your dummy node always points to the true head. Return dummy.next at the end.",
+            },
+            {
+              q: "How does Floyd's cycle detection algorithm work?",
+              a: "Two pointers: slow moves 1 step, fast moves 2 steps. If a cycle exists, fast will eventually lap slow and they'll meet inside the cycle. If no cycle, fast reaches None.",
+            },
+            {
+              q: "What's the difference between singly and doubly linked lists?",
+              a: "Singly: each node has only a 'next' pointer. Doubly: each node has 'next' AND 'prev'. Doubly uses 2x memory but supports O(1) backwards traversal and easier deletion given a node pointer.",
+            },
+          ],
+          stack: [
+            {
+              q: "Stack is LIFO. Give 3 real-world examples.",
+              a: "1. Browser back button (back = pop from history stack). 2. Ctrl+Z undo (each action pushed, undo pops). 3. Function call stack in Python (each function call = push frame, return = pop frame).",
+            },
+            {
+              q: "What is a monotonic stack and when is it useful?",
+              a: "A stack where elements are kept in strictly increasing or decreasing order. When a new element breaks the order, you pop until order is restored. Used for 'next greater/smaller element', 'largest rectangle in histogram', 'stock span' problems.",
+            },
+            {
+              q: "How would you implement a queue using two stacks?",
+              a: "Use stack1 for enqueue (push), stack2 for dequeue (pop). When dequeue is called and stack2 is empty, pour all elements from stack1 into stack2 (reversing them). Pop from stack2. Amortized O(1) per operation.",
+            },
+          ],
+          queue: [
+            {
+              q: "Why is collections.deque better than list for a queue?",
+              a: "list.pop(0) is O(n) because Python shifts all remaining elements one position left. deque is a doubly-linked list under the hood — popleft() is O(1). For BFS on large graphs, this difference is massive.",
+            },
+            {
+              q: "What is the difference between BFS and DFS in terms of data structure?",
+              a: "BFS uses a Queue (FIFO) — explores nodes level by level, guarantees shortest path in unweighted graphs. DFS uses a Stack or recursion (LIFO) — dives deep first, better for cycle detection and topological sort.",
+            },
+            {
+              q: "How do you do level-order traversal with exact levels?",
+              a: "Use len(queue) at the START of each iteration to know how many nodes are at the current level. Process exactly that many nodes before moving to the next level. This separates levels precisely.",
+            },
+          ],
+          hash: [
+            {
+              q: "What is a hash collision and how does Python handle it?",
+              a: "A collision happens when two different keys hash to the same bucket index. Python's dict uses open addressing with a probing sequence. CPython's dict is highly optimized and resizes when ~2/3 full to maintain O(1) performance.",
+            },
+            {
+              q: "When would you use defaultdict vs regular dict?",
+              a: "Use defaultdict when you're grouping items or counting and don't want to initialize keys manually. d = defaultdict(list) lets you do d[key].append(val) without checking if key exists. Regular dict.get(key, default) is fine for single lookups.",
+            },
+            {
+              q: "How does Counter differ from a manual frequency dict?",
+              a: "Counter is a subclass of dict with extra methods: most_common(n), subtraction between Counters, +/- operators. It also returns 0 for missing keys (no KeyError) and supports arithmetic. Functionally equivalent to defaultdict(int) for counting.",
+            },
+          ],
+          tree: [
+            {
+              q: "What does inorder traversal of a BST give you?",
+              a: "It gives all nodes in sorted ascending order. This is because inorder visits Left → Root → Right. In a BST, all left children are smaller than root which is smaller than all right children — so left, then root, then right = sorted.",
+            },
+            {
+              q: "What is the difference between height and depth of a node?",
+              a: "Depth of a node = distance from root (root has depth 0). Height of a node = length of longest path to a leaf below it. Height of leaf = 0. Height of tree = height of root.",
+            },
+            {
+              q: "How do you check if a binary tree is balanced?",
+              a: "A tree is balanced if for every node, the height difference between left and right subtrees is at most 1. Compute height recursively: height = 1 + max(height(left), height(right)). Return -1 as a sentinel for 'unbalanced'.",
+            },
+          ],
+          graph: [
+            {
+              q: "When would you use BFS over DFS?",
+              a: "Use BFS when: finding shortest path in unweighted graph, level-order traversal, finding all nodes within distance k. Use DFS when: detecting cycles, topological sort, finding all connected components, exploring all paths (backtracking).",
+            },
+            {
+              q: "What is topological sort and when is it used?",
+              a: "Topological sort orders nodes of a DAG (Directed Acyclic Graph) so that for every directed edge u→v, u comes before v. Used for: course prerequisites, build systems (which module to compile first), task scheduling with dependencies.",
+            },
+            {
+              q: "How do you detect a cycle in a directed graph?",
+              a: "Use DFS with 3 states per node: UNVISITED (0), IN_STACK (1), DONE (2). If during DFS you encounter a node that is IN_STACK (currently being processed in the same DFS path), there is a cycle. Mark as DONE when all neighbors are processed.",
+            },
+          ],
+          sorting: [
+            {
+              q: "Which sorting algorithm guarantees O(n log n) in worst case AND O(1) space?",
+              a: "Heap Sort. Merge Sort guarantees O(n log n) worst case but uses O(n) space. Quick Sort is O(n log n) average but O(n²) worst case. Heap Sort achieves both O(n log n) worst case and O(1) extra space — though it's not stable.",
+            },
+            {
+              q: "Why is Quick Sort usually faster than Merge Sort in practice despite same average complexity?",
+              a: "Cache locality. Quick Sort works in-place, accessing memory sequentially. Merge Sort creates new arrays (O(n) space) and has more memory allocation overhead. The cache misses in Merge Sort hurt real-world performance more than the theoretical analysis suggests.",
+            },
+            {
+              q: "What makes Python's Timsort special?",
+              a: "Timsort is a hybrid of Merge Sort + Insertion Sort. It detects existing sorted 'runs' in the data (exploiting real-world partially-sorted data), uses Insertion Sort for small runs (cache-friendly), and merges using Merge Sort. Result: O(n) best case, O(n log n) worst, and stable.",
+            },
+          ],
+          search: [
+            {
+              q: "Why use (left + right) // 2 for mid instead of (left + right) / 2?",
+              a: "// ensures integer division giving an exact index. / gives a float which can't be used as an index. In Python integers don't overflow, but in C++/Java you'd use left + (right-left)//2 to prevent integer overflow when left+right exceeds INT_MAX.",
+            },
+            {
+              q: "What happens if you use left <= right vs left < right as the while condition?",
+              a: "left <= right: handles the case where left==right (single element). Terminates when left > right. left < right: misses the single-element case. For most binary search problems, <= is correct. Use < only for specific variants like 'find leftmost insertion point'.",
+            },
+            {
+              q: "How do you use binary search when the answer isn't in the array?",
+              a: "'Binary search on the answer' — define a monotonic predicate (is_feasible(x)?) and binary search for the boundary. Example: find minimum speed such that you can finish in h hours. Search the range [1, max_piles], check if feasible at each mid.",
+            },
+          ],
+          dp: [
+            {
+              q: "What are the two necessary conditions for a problem to be solvable by DP?",
+              a: "1. Optimal substructure: the optimal solution to the problem contains optimal solutions to subproblems. 2. Overlapping subproblems: the same subproblems are solved multiple times in a naive recursive approach. Both must be true.",
+            },
+            {
+              q: "Top-down memoization vs bottom-up tabulation — when to use each?",
+              a: "Top-down (memo): easier to write, only computes needed subproblems, use when not all subproblems are needed. Bottom-up (table): no recursion overhead, easier to optimize space, better when all subproblems are needed. For most interview problems, both work fine.",
+            },
+            {
+              q: "How do you identify if a problem is 1D vs 2D DP?",
+              a: "1D DP: state depends on one variable (fib(n), climb(n), coin_change(amount)). 2D DP: state depends on two variables — usually two sequences (LCS of s1,s2), or one sequence with an extra constraint (knapsack with weight limit). The dp array dimensions match the number of state variables.",
+            },
+          ],
+        },
+        quiz: {
+          array: [
+            {
+              q: "What does arr[::-1] return?",
+              opts: [
+                "First element",
+                "Last element",
+                "Reversed list",
+                "Sorted list",
+              ],
+              a: 2,
+              e: "arr[::-1] uses step=-1, creating a new list with elements in reverse order. Original unchanged.",
+            },
+            {
+              q: "What is the time complexity of arr.pop() vs arr.pop(0)?",
+              opts: [
+                "Both O(1)",
+                "Both O(n)",
+                "pop()=O(1), pop(0)=O(n)",
+                "pop()=O(n), pop(0)=O(1)",
+              ],
+              a: 2,
+              e: "pop() removes from the end — no shifting needed, O(1). pop(0) removes from front — all elements shift left, O(n). Use deque.popleft() for O(1) front removal.",
+            },
+            {
+              q: "What is Kadane's Algorithm used for?",
+              opts: [
+                "Finding duplicates",
+                "Maximum subarray sum",
+                "Two sum problem",
+                "Sorting",
+              ],
+              a: 1,
+              e: "Kadane's finds the contiguous subarray with the maximum sum in O(n). Key idea: at each position, either extend the current subarray or start a new one.",
+            },
+          ],
+          linked: [
+            {
+              q: "After reversing 1→2→3→None, what is the output?",
+              opts: ["1→2→3", "3→2→1→None", "None→1→2→3", "3→None"],
+              a: 1,
+              e: "Reversing flips all next pointers. 1.next=None, 2.next=1, 3.next=2. New head=3. Result: 3→2→1→None.",
+            },
+            {
+              q: "Floyd's cycle detection: slow moves 1 step, fast moves 2. When do they meet?",
+              opts: ["Never", "At the head", "Inside the cycle", "At the tail"],
+              a: 2,
+              e: "If a cycle exists, fast will eventually catch up to slow inside the cycle. The math: fast gains 1 step per iteration relative to slow, so they meet after at most 'cycle_length' steps.",
+            },
+            {
+              q: "What does a dummy head node help with?",
+              opts: [
+                "Faster traversal",
+                "Eliminating edge cases at the head",
+                "Cycle detection",
+                "Memory savings",
+              ],
+              a: 1,
+              e: "A dummy head node means you never need to special-case 'if I'm deleting the head'. Always return dummy.next as the result. Makes code simpler and less bug-prone.",
+            },
+          ],
+          stack: [
+            {
+              q: "stack = [1,2,3]; stack.pop() returns?",
+              opts: ["1", "2", "3", "None"],
+              a: 2,
+              e: "Stack is LIFO. pop() removes and returns the LAST appended element. 3 was appended last, so pop() returns 3. Stack becomes [1,2].",
+            },
+            {
+              q: "Which problem classically uses a monotonic decreasing stack?",
+              opts: [
+                "Two Sum",
+                "Next Greater Element",
+                "Fibonacci",
+                "BFS traversal",
+              ],
+              a: 1,
+              e: "Monotonic decreasing stack: maintain elements in decreasing order. When a larger element arrives, pop smaller elements — they found their 'next greater'. Classic problem: 'Next Greater Element'.",
+            },
+            {
+              q: "How to peek at the top of stack without popping?",
+              opts: ["stack.top()", "stack[0]", "stack[-1]", "stack.peek()"],
+              a: 2,
+              e: "stack[-1] accesses the last element (top of stack) without removing it. Python lists don't have a peek() method — use negative indexing.",
+            },
+          ],
+          queue: [
+            {
+              q: "Why use collections.deque instead of list as a queue?",
+              opts: [
+                "deque is sorted",
+                "deque.popleft() is O(1), list.pop(0) is O(n)",
+                "deque allows duplicates",
+                "deque uses less memory",
+              ],
+              a: 1,
+              e: "list.pop(0) shifts all elements — O(n). deque is a doubly-linked list: popleft() removes the first node without shifting anything — O(1).",
+            },
+            {
+              q: "In BFS level-order traversal, what determines the number of nodes at each level?",
+              opts: [
+                "Height of tree",
+                "len(queue) at start of each level",
+                "Total nodes / 2",
+                "Number of leaves",
+              ],
+              a: 1,
+              e: "Capture len(q) at the START of each while-loop iteration. This is the number of nodes at the current level. Process exactly that many popleft() calls before the inner loop ends.",
+            },
+            {
+              q: "deque(['A','B','C']). After popleft() twice, what remains?",
+              opts: ["['A']", "['B','C']", "['C']", "[]"],
+              a: 2,
+              e: "FIFO: popleft() removes from the front. First popleft() removes 'A', second removes 'B'. Remaining: deque(['C']).",
+            },
+          ],
+          hash: [
+            {
+              q: "d = {'a':1}; d.get('b', 0) returns?",
+              opts: ["KeyError", "None", "0", "1"],
+              a: 2,
+              e: "dict.get(key, default) returns default (here 0) when key doesn't exist, instead of raising KeyError. Always prefer .get() when the key might be missing.",
+            },
+            {
+              q: "Counter('banana')['x'] returns?",
+              opts: ["KeyError", "None", "0", "-1"],
+              a: 2,
+              e: "Counter returns 0 for missing keys — unlike a regular dict which raises KeyError. This is one of Counter's key advantages for frequency counting.",
+            },
+            {
+              q: "What is O(1) for both dict and set but O(n) for list?",
+              opts: [
+                "Indexing",
+                "Appending",
+                "Membership test (x in ...)",
+                "Sorting",
+              ],
+              a: 2,
+              e: "'x in list' scans every element — O(n). 'x in dict' and 'x in set' use the hash function to jump directly to the bucket — O(1) average.",
+            },
+          ],
+          tree: [
+            {
+              q: "Inorder traversal of a BST gives nodes in which order?",
+              opts: [
+                "Insertion order",
+                "Sorted descending",
+                "Sorted ascending",
+                "Level by level",
+              ],
+              a: 2,
+              e: "Inorder (Left→Root→Right) visits BST nodes in sorted ascending order. This is a fundamental BST property: left subtree < root < right subtree.",
+            },
+            {
+              q: "max_depth(root) base case should return?",
+              opts: [
+                "0 when root is None",
+                "1 when root is None",
+                "-1 when root is None",
+                "0 when root has no children",
+              ],
+              a: 0,
+              e: "When root is None, we've gone past a leaf — the depth contribution is 0. Then we add 1 for each level as we recurse back up: 1 + max(left_depth, right_depth).",
+            },
+            {
+              q: "Level-order traversal uses which data structure?",
+              opts: ["Stack", "Queue", "Heap", "Recursion stack"],
+              a: 1,
+              e: "Level-order traversal is BFS on a tree. BFS uses a Queue (FIFO) to process nodes level by level. Python: use collections.deque.",
+            },
+          ],
+          graph: [
+            {
+              q: "BFS guarantees shortest path in which type of graph?",
+              opts: [
+                "Weighted directed",
+                "Unweighted (or equal-weight)",
+                "Negative weight",
+                "Any graph",
+              ],
+              a: 1,
+              e: "BFS explores nodes in order of distance (number of edges) from source. This guarantees shortest path only in unweighted or equal-weight graphs. For weighted graphs, use Dijkstra's (min-heap + BFS-like).",
+            },
+            {
+              q: "In Number of Islands, why do we set grid[r][c]='0' during DFS?",
+              opts: [
+                "To sink the island",
+                "To mark cell as visited without extra space",
+                "Both A and B",
+                "To count water cells",
+              ],
+              a: 1,
+              e: "Setting '1' to '0' marks the cell as visited in-place, avoiding an extra visited set. Once we've processed a cell, we don't want to process it again. This is a common in-place visiting trick.",
+            },
+            {
+              q: "Adjacency list vs adjacency matrix: which to prefer for sparse graphs?",
+              opts: [
+                "Adjacency matrix",
+                "Adjacency list",
+                "Both are equal",
+                "Depends on language",
+              ],
+              a: 1,
+              e: "Adjacency list uses O(V+E) space. Adjacency matrix uses O(V²). For sparse graphs (E << V²), adjacency list is far more memory-efficient and iteration over neighbors is O(degree) not O(V).",
+            },
+          ],
+          sorting: [
+            {
+              q: "Which sort is stable AND guaranteed O(n log n) worst case?",
+              opts: ["Quick Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+              a: 2,
+              e: "Merge Sort is stable (preserves relative order of equal elements) and always O(n log n). Heap Sort is O(n log n) but not stable. Quick Sort is O(n²) worst case.",
+            },
+            {
+              q: "Python's sort() uses which algorithm?",
+              opts: ["Quick Sort", "Merge Sort", "Timsort", "Heap Sort"],
+              a: 2,
+              e: "Python uses Timsort — a hybrid of Merge Sort and Insertion Sort. It's O(n) best case (already sorted), O(n log n) average/worst, stable, and exploits real-world partially-sorted data.",
+            },
+            {
+              q: "arr.sort(key=lambda x: -x) sorts in which order?",
+              opts: ["Ascending", "Descending", "By absolute value", "Random"],
+              a: 1,
+              e: "Using key=lambda x: -x sorts by negative value, which sorts the original values in descending order. Equivalent to arr.sort(reverse=True).",
+            },
+          ],
+          search: [
+            {
+              q: "Binary search requires the array to be?",
+              opts: [
+                "Unsorted",
+                "Sorted",
+                "Distinct elements",
+                "Non-negative values",
+              ],
+              a: 1,
+              e: "Binary search requires sorted input. At each step, it decides whether target is in the left or right half based on comparing with the midpoint — this only works if elements are sorted.",
+            },
+            {
+              q: "mid = (left + right) // 2. In Python, is this safe?",
+              opts: [
+                "No — integer overflow",
+                "Yes — Python ints have arbitrary precision",
+                "Only for small arrays",
+                "Depends on Python version",
+              ],
+              a: 1,
+              e: "In Python, integers have arbitrary precision — they can't overflow. In C++/Java you'd use left + (right-left)//2. In Python, (left+right)//2 is always safe.",
+            },
+            {
+              q: "Binary search on arr=[1,3,5,7,9], target=6 returns?",
+              opts: ["2", "3", "-1", "4"],
+              a: 2,
+              e: "6 is not in the array. Binary search exhausts all possibilities (left > right) without finding 6. Returns -1 (not found).",
+            },
+          ],
+          dp: [
+            {
+              q: "Without memoization, fib(n) has what time complexity?",
+              opts: ["O(n)", "O(n log n)", "O(2^n)", "O(n^2)"],
+              a: 2,
+              e: "Without memoization, fib(n) calls fib(n-1) and fib(n-2), each of which call two more, creating a binary tree of depth n. Total calls ≈ 2^n. With memoization or bottom-up DP: O(n).",
+            },
+            {
+              q: "In coin_change DP, dp[0] = ?",
+              opts: ["infinity", "1", "0", "-1"],
+              a: 2,
+              e: "dp[0] = 0 is the base case: it takes 0 coins to make amount 0. All other dp[i] start as infinity (impossible). Without this base case, the DP would never compute valid values.",
+            },
+            {
+              q: "LCS of 'ABCDE' and 'ACE' is?",
+              opts: ["1", "2", "3", "5"],
+              a: 2,
+              e: "LCS('ABCDE','ACE') = 3. The subsequence 'ACE' appears in both strings (indices 0,2,4 in ABCDE). Length = 3. Note: subsequence doesn't need to be contiguous.",
+            },
+          ],
+        },
+      };
+
+      // ══════════════════════════════════════════════════
+      // BUILD QNA
+      // ══════════════════════════════════════════════════
+      function buildQNA() {
+        Object.entries(data.qna).forEach(([topic, items]) => {
+          const el = document.getElementById(`qna-${topic}`);
+          if (!el) return;
+          el.innerHTML = items
+            .map(
+              (item, i) => `
+      <div class="qna-item">
+        <div class="qna-q" onclick="toggleQna(this)">
+          <span>Q${i + 1}: ${item.q}</span>
+          <span class="qna-arrow">▶</span>
+        </div>
+        <div class="qna-a">${item.a}</div>
+      </div>
+    `,
+            )
+            .join("");
+        });
+      }
+
+      function toggleQna(el) {
+        const answer = el.nextElementSibling;
+        const arrow = el.querySelector(".qna-arrow");
+        answer.classList.toggle("open");
+        arrow.classList.toggle("open");
+      }
+
+      // ══════════════════════════════════════════════════
+      // BUILD QUIZZES
+      // ══════════════════════════════════════════════════
+      function buildQuizzes() {
+        Object.entries(data.quiz).forEach(([topic, qs]) => {
+          const el = document.getElementById(`q-${topic}`);
+          if (!el) return;
+          el.innerHTML = qs
+            .map(
+              (q, qi) => `
+      <div class="q-item">
+        <div class="q-text">${qi + 1}. ${q.q}</div>
+        ${q.opts
+          .map(
+            (o, oi) => `
+          <span class="q-opt" onclick="answerQ(this,'${topic}',${qi},${oi})">${String.fromCharCode(65 + oi)}. ${o}</span>
+        `,
+          )
+          .join("")}
+        <div class="q-exp" id="qe-${topic}-${qi}">💡 ${q.e}</div>
+      </div>
+    `,
+            )
+            .join("");
+        });
+      }
+
+      function answerQ(el, topic, qi, oi) {
+        const parent = el.parentElement;
+        if (parent.querySelector(".correct,.wrong")) return;
+        const correct = data.quiz[topic][qi].a;
+        if (oi === correct) el.classList.add("correct");
+        else {
+          el.classList.add("wrong");
+          parent.querySelectorAll(".q-opt")[correct].classList.add("reveal");
+        }
+        document.getElementById(`qe-${topic}-${qi}`).classList.add("show");
+      }
+
+      // ══════════════════════════════════════════════════
+      // NAVIGATION
+      // ══════════════════════════════════════════════════
+      const sections = [
+        "welcome",
+        "array",
+        "linked",
+        "stack",
+        "queue",
+        "hash",
+        "tree",
+        "graph",
+        "sorting",
+        "search",
+        "dp",
+        "python",
+      ];
+      let visited = new Set(["welcome"]);
+
+      function nav(id, el) {
+        sections.forEach((s) => {
+          const sec = document.getElementById(`sec-${s}`);
+          if (sec) sec.classList.remove("active");
+        });
+        document
+          .querySelectorAll(".nav-item")
+          .forEach((n) => n.classList.remove("active"));
+
+        const target = document.getElementById(`sec-${id}`);
+        if (target) {
+          target.classList.add("active");
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        if (el) el.classList.add("active");
+        else {
+          document.querySelectorAll(".nav-item").forEach((n) => {
+            if (n.textContent.toLowerCase().includes(id))
+              n.classList.add("active");
+          });
+        }
+
+        visited.add(id);
+        const pct = Math.round((visited.size / sections.length) * 100);
+        document.getElementById("prog-done").textContent = visited.size;
+        document.getElementById("prog-total").textContent = sections.length;
+        document.getElementById("prog-fill").style.width = pct + "%";
+      }
+
+      // Make welcome active by default
+      document.querySelectorAll(".nav-item").forEach((n) => {
+        if (n.textContent.trim() === "Overview") n.classList.add("active");
+      });
+
+      // ══════════════════════════════════════════════════
+      // STACK PLAYGROUND
+      // ══════════════════════════════════════════════════
+      let stackArr = [];
+      function sLog(msg, cls) {
+        const l = document.getElementById("s-log");
+        l.innerHTML += `<span class="${cls || ""}">${msg}</span>\n`;
+        l.scrollTop = l.scrollHeight;
+      }
+      function sPush() {
+        const v = document.getElementById("s-inp").value || "?";
+        stackArr.push(v);
+        sLog(`push(${v}) → stack = [${stackArr.join(", ")}]`, "log-g");
+      }
+      function sPop() {
+        if (!stackArr.length) {
+          sLog("pop() → ERROR: empty stack!", "log-r");
+          return;
+        }
+        const v = stackArr.pop();
+        sLog(`pop() → ${v} | stack = [${stackArr.join(", ")}]`, "log-r");
+      }
+      function sPeek() {
+        if (!stackArr.length) {
+          sLog("peek() → ERROR: empty stack!", "log-r");
+          return;
+        }
+        sLog(`peek() → top = ${stackArr[stackArr.length - 1]}`, "log-y");
+      }
+
+      // ══════════════════════════════════════════════════
+      // QUEUE PLAYGROUND
+      // ══════════════════════════════════════════════════
+      let queueArr = [];
+      function qLog(msg, cls) {
+        const l = document.getElementById("q-log");
+        l.innerHTML += `<span class="${cls || ""}">${msg}</span>\n`;
+        l.scrollTop = l.scrollHeight;
+      }
+      function qEnq() {
+        const v = document.getElementById("q-inp").value || "?";
+        queueArr.push(v);
+        qLog(`enqueue(${v}) → queue = [${queueArr.join(", ")}]`, "log-g");
+      }
+      function qDeq() {
+        if (!queueArr.length) {
+          qLog("dequeue() → ERROR: empty queue!", "log-r");
+          return;
+        }
+        const v = queueArr.shift();
+        qLog(`dequeue() → ${v} | queue = [${queueArr.join(", ")}]`, "log-y");
+      }
+
+      // ══════════════════════════════════════════════════
+      // INIT
+      // ══════════════════════════════════════════════════
+      buildQNA();
+      buildQuizzes();
+      document.getElementById("prog-total").textContent = sections.length;
+      document.getElementById("prog-done").textContent = "1";
+      document.getElementById("prog-fill").style.width =
+        Math.round((1 / sections.length) * 100) + "%";
+    </script>
+  </body>
+</html>
